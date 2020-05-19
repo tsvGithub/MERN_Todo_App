@@ -7,17 +7,20 @@ import axios from "axios";
 const Todo = (props) => (
   //[props.todo] = props from todoList() function with Component
   //<Todo todo={currentTodo}/> => [props.todo]==currentTodo
-  //=>props.todo.todo_description === currentTodo[todo_description]
+  //=>props.todo.description === currentTodo[description]
   <tr>
     {/*8 if 'completed'(true/false) => applies css.completed or (if not completed) empty string =>no classes applied  */}
 
-    <td className={props.todo.todo_completed ? "completed" : ""}>{props.todo.todo_description}</td>
-    <td className={props.todo.todo_completed ? "completed" : ""}>{props.todo.todo_responsible}</td>
-    <td className={props.todo.todo_completed ? "completed" : ""}>{props.todo.todo_priority}</td>
+    {/* <td>{props.todo.description}</td>
+    <td>{props.todo.responsible}</td>
+    <td>{props.todo.priority}</td> */}
+    <td className={props.todo.completed ? "completed" : ""}>{props.todo.description}</td>
+    <td className={props.todo.completed ? "completed" : ""}>{props.todo.responsible}</td>
+    <td className={props.todo.completed ? "completed" : ""}>{props.todo.priority}</td>
     <td>
       {/* Actions column with Link to route 'edit' with ID from DB*/}
       <Link to={"/edit/" + props.todo._id}>Edit</Link>
-      {/*-------------------- */} |
+      {/*---------DELETE----------- */} |
       <a
         href="#"
         onClick={() => {
@@ -74,7 +77,7 @@ export default class TodoList extends Component {
   // }
   //--------------------------
   deleteTodo(id) {
-    debugger;
+    // debugger;
     axios.delete("http://localhost:4000/todos/" + id).then((response) => {
       console.log(response.data);
     });

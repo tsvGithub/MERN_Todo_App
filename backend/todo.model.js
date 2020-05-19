@@ -4,16 +4,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 //describe Schema
 let Todo = new Schema({
-  todo_description: {
+  description: {
     type: String,
   },
-  todo_responsible: {
+  responsible: {
     type: String,
   },
-  todo_priority: {
+  priority: {
     type: String,
   },
-  todo_completed: {
+  completed: {
     type: Boolean,
   },
 });

@@ -17,10 +17,10 @@ export default class CreateList extends Component {
     //State Object for CreateList component with default values
     //if you need you can add many more properties
     this.state = {
-      todo_description: "",
-      todo_responsible: "",
-      todo_priority: "",
-      todo_completed: false,
+      description: "",
+      responsible: "",
+      priority: "",
+      completed: false,
     };
   }
   // 3 -------------------------------------------
@@ -29,17 +29,17 @@ export default class CreateList extends Component {
   onChangeTodoDescription(e) {
     this.setState({
       //call State to update key-value parametrs with new
-      todo_description: e.target.value,
+      description: e.target.value,
     });
   }
   onChangeTodoResponsible(e) {
     this.setState({
-      todo_responsible: e.target.value,
+      responsible: e.target.value,
     });
   }
   onChangeTodoPriority(e) {
     this.setState({
-      todo_priority: e.target.value,
+      priority: e.target.value,
     });
   }
 
@@ -51,18 +51,18 @@ export default class CreateList extends Component {
     //Console.log all Values from CreateList Component STATE
     //  ${this.state.+ key}
     console.log(`Form submited:`);
-    console.log(`Todo Description: ${this.state.todo_description}`);
-    console.log(`Todo Responsible: ${this.state.todo_responsible}`);
-    console.log(`Todo Priority: ${this.state.todo_priority}`);
-    console.log(`Todo Completed: ${this.state.todo_completed}`);
+    console.log(`Todo Description: ${this.state.description}`);
+    console.log(`Todo Responsible: ${this.state.responsible}`);
+    console.log(`Todo Priority: ${this.state.priority}`);
+    console.log(`Todo Completed: ${this.state.completed}`);
     //----------------------------------------
     //9 create new Todo item with value coming from form &
     //send it over HTTP post request to the back-end part
     const newTodo = {
-      todo_description: this.state.todo_description,
-      todo_responsible: this.state.todo_responsible,
-      todo_priority: this.state.todo_priority,
-      todo_completed: this.state.todo_completed,
+      description: this.state.description,
+      responsible: this.state.responsible,
+      priority: this.state.priority,
+      completed: this.state.completed,
     };
     //9a call Axios with method POST & with 2 args:
     //back-end URL end-point & object newTodo
@@ -71,10 +71,10 @@ export default class CreateList extends Component {
     //----------------------------------------
     //5 reset STATE  once the form is submitted to initial STATE
     this.setState({
-      todo_description: "",
-      todo_responsible: "",
-      todo_priority: "",
-      todo_completed: false,
+      description: "",
+      responsible: "",
+      priority: "",
+      completed: false,
     });
 
     //After the form is submitted, the location is updated
@@ -98,7 +98,7 @@ export default class CreateList extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.todo_description}
+              value={this.state.description}
               onChange={this.onChangeTodoDescription}
             />
           </div>
@@ -108,7 +108,7 @@ export default class CreateList extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.todo_responsible}
+              value={this.state.responsible}
               onChange={this.onChangeTodoResponsible}
             />
             {/*Priority: set Value attribute to corresponding STATE property & onCanhge event will update STATE */}
@@ -120,7 +120,7 @@ export default class CreateList extends Component {
                   name="priorityOptions"
                   id="priorityLow"
                   value="Low"
-                  checked={this.state.todo_priority == "Low"}
+                  checked={this.state.priority === "Low"}
                   onChange={this.onChangeTodoPriority}
                 />
                 {/*checked can be compared to Value attribute */}
@@ -133,7 +133,7 @@ export default class CreateList extends Component {
                   name="priorityOptions"
                   id="priorityMedium"
                   value="Medium"
-                  checked={this.state.todo_priority == "Medium"}
+                  checked={this.state.priority === "Medium"}
                   onChange={this.onChangeTodoPriority}
                 />
                 <label className="form-check-label">Medium</label>
@@ -145,7 +145,7 @@ export default class CreateList extends Component {
                   name="priorityOptions"
                   id="priorityHigh"
                   value="High"
-                  checked={this.state.todo_priority == "High"}
+                  checked={this.state.priority === "High"}
                   onChange={this.onChangeTodoPriority}
                 />
                 <label className="form-check-label">High</label>

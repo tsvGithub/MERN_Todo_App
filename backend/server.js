@@ -75,10 +75,10 @@ todoRoutes.route("/:id").put(function (req, res) {
     //if todo doesn't exist
     if (!todo) res.status(404).send("data is not found");
     //if OK, update properties to what has been submited
-    else todo.todo_description = req.body.todo_description;
-    todo.todo_responsible = req.body.todo_responsible;
-    todo.todo_priority = req.body.todo_priority;
-    todo.todo_completed = req.body.todo_completed;
+    else todo.description = req.body.description;
+    todo.responsible = req.body.responsible;
+    todo.priority = req.body.priority;
+    todo.completed = req.body.completed;
     //save new values to DB
     todo
       .save()
