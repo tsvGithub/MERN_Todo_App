@@ -61,9 +61,9 @@ todoRoutes.route("/").post(function (req, res) {
       //if OK, return JSON Object {{}}
       res.status(200).json({ todo: "todo added successfully" });
     })
-    //or cathc error
+    //or catch error
     .catch((err) => {
-      res.status(400).send("adding new todo fialed");
+      res.status(400).send("adding new todo failed");
     });
 });
 //--------------------------------------------------------
