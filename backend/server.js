@@ -1,19 +1,26 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-//to access to the Express router to connect endpoints & server
+//-----------------------------------
+//calling the CORS & JSONparser
+app.use(cors());
+app.use(express.json());
+//-------------------------------------
+//expressRouter for different routes: users, posts, etc
 const todoRoutes = express.Router();
-const PORT = 4000;
+//-----------------
+//to connect endpoints & server
+//inserting the Router which is attached to URL path "/todos"
+//& attach the router -> todoRoutes
+app.use("/todos", todoRoutes);
 //------------------------------------
 //importing Todo to access the Schema for Mongoose from todo.model.js
 let Todo = require("./todo.model");
+
+//-------------------------------
+const PORT = 4000;
 //------------------------------------
-//calling the CORS & body-parser
-app.use(cors());
-app.use(bodyParser.json());
-//-------------------------------------
 //calling mongoose to connect to 'todos' DB & config objects
 mongoose.connect("mongodb://localhost:27017/todos", {
   useUnifiedTopology: true,
@@ -21,7 +28,7 @@ mongoose.connect("mongodb://localhost:27017/todos", {
 });
 const connection = mongoose.connection;
 connection.once("open", function () {
-  console.log("MongoDB database connection established successfully");
+  console.log("MongoDB connected");
 });
 //===============================================
 //CRUD
@@ -98,12 +105,8 @@ todoRoutes.route("/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//-----------------
-//to access to the Express router to connect endpoints & server
-//inserting the Router which is attached to URL path "/todos"
-//& attach the router -> todoRoutes
-app.use("/todos", todoRoutes);
-
+//-----------------------------------------
+//=========================================
 app.listen(PORT, function () {
   console.log(`Server is running on Port: ${PORT}`);
 });

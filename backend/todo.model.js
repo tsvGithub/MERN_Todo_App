@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 //access to Schema Object
 const Schema = mongoose.Schema;
-//describe Schema
-let Todo = new Schema({
+const Todo = new Schema({
   description: {
     type: String,
   },
