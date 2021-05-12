@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 //-----------------------------------
-//calling the CORS & JSONparser
+//calling the CORS & JSONparser: ()
 app.use(cors());
 app.use(express.json());
 //-------------------------------------
