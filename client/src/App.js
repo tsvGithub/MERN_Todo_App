@@ -1,51 +1,59 @@
 import React from "react";
-//for routes
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-//import  all components from components folder
-import CreateTodo from "./components/create-todo.component";
-import EditTodo from "./components/edit-todo.component";
-import TodosList from "./components/todo-list.component";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-import logo from "./logo.png";
+// import CreateTodo from "./components/create-todo.component";
+// import EditTodo from "./components/edit-todo.component";
+// import TodosList from "./components/todo-list.component";
+
+// import TodosList from "./components/TodoList";
+
+// import logo from "./logo.png";
+import Form from "./components/Form";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    //Router from BrowserRouter
     <Router>
-      <div className="container">
-        {/*Navigation Bar with Links to access to Routes */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="https://github.com/tsvGithub" target="_blank" rel="noopener noreferrer">
-            <img src={logo} width="50" height="50" alt="Just Do It!" />
-          </a>
-          {/*Links to Routes */}
-          <Link to="/" className="navbar-brand">
-            MERN_Stack Todo App
-          </Link>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
-              <li className="navbar-item">
-                {/*Links to Route TodosList */}
-                <Link to="/" className="nav-link">
-                  Todos
-                </Link>
-              </li>
-              <li className="navbar-item">
-                {/*Links to Route Create Todo */}
-                <Link to="/create" className="nav-link">
-                  Create Todo
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        {/*ROUTES for each Route & it have at least 2 attributes - path and component to connect to*/}
-        <Route path="/" exact component={TodosList} /> {/*todo-list.component.js */}
-        <Route path="/edit/:id" component={EditTodo} /> {/*edit-list.component.js */}
-        <Route path="/create" component={CreateTodo} /> {/*create-list.component.js */}
-      </div>
+      <>
+        <Switch>
+          <Route path="/">
+            {/* <Form /> */}
+            <TodoList />
+          </Route>
+
+          {/* <Route path="/">
+            <TodoList />
+          </Route> */}
+        </Switch>
+      </>
     </Router>
+    //Router from BrowserRouter
+    // <Router>
+    //   <div className="container">
+    //     <nav className="navbar">
+    //       <a href="https://github.com/tsvGithub" target="_blank" rel="noopener noreferrer">
+    //         {/* <img src={logo} alt="Just Do It!" /> */}
+    //       </a>
+    //       {/*Links==='a'*/}
+    //       <Link to="/" className="navbar-brand">
+    //         Todos
+    //       </Link>
+    //       <ul>
+    //         <li>
+    //           <Link to="/">Todos</Link>
+    //         </li>
+    //         <li>
+    //           <Link to="/create">Create Todo</Link>
+    //         </li>
+    //       </ul>
+    //     </nav>
+
+    //     {/*ROUTES for each Route & it have at least 2 attributes - path and component to connect to*/}
+    //     <Route path="/" exact component={TodosList} />
+    //     <Route path="/edit/:id" component={EditTodo} />
+    //     <Route path="/create" component={CreateTodo} />
+    //   </div>
+    // </Router>
   );
 }
 
