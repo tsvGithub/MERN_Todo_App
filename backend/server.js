@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+//-------------------------
+require("dotenv").config();
+// console.log(process.env.DB_URI);
 //-----------------------------------
-//calling the CORS & JSONparser: ()
 app.use(cors());
+//parse 'json' when server sends&recieves 'json'
 app.use(express.json());
 //-------------------------------------
 // //expressRouter for different routes: users, posts, etc
