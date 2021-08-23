@@ -1,3 +1,100 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+/*=============== 
+Variables
+===============*/
+:root {
+  /* Primary */
+  --Primary-Bright-Blue: hsl(220, 98%, 61%);
+  --Primary-Check-Background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  /* Light Theme */
+  --LT-Very-Light-Gray: hsl(0, 0%, 98%);
+  --LT-Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --LT-Light-Grayish-Blue: hsl(232, 24%, 75%);
+  --LT-Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --LT-Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  /* Dark Theme */
+  --DT-Very-Dark-Blue: hsl(235, 21%, 11%);
+  --DT-Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+  --DT-Light-Grayish-Blue: hsl(234, 39%, 85%);
+  --DT-Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+  --DT-Dark-Grayish-Blue: hsl(234, 11%, 52%);
+  --DT-Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
+  --DT-Very-Dark-Grayish-Blue-hover: hsl(237, 14%, 26%);
+  /* Font Weights */
+  --normal: 400;
+  --bold: 700;
+  /* General */
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  --max-width: 1170px;
+  --fixed-width: 450px;
+}
+
+/*=============== 
+Global Styles
+===============*/
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*,
+*:focus,
+*:active,
+*:hover,
+*:visited,
+*:focus-visible,
+*:focus-within,
+*:focus:not(:focus-visible),
+*::before,
+*::after {
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.125rem; /*18px;*/
+  line-height: 1.5;
+  /* background-color: var(--DT-Very-Dark-Blue);
+  color: var(--DT-Light-Grayish-Blue); */
+}
+ul,
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 50%;
+  min-width: 340px;
+  margin: 2rem auto;
+  /* padding: 0 10px; */
+  display: grid;
+  grid-row-gap: 30px;
+}
+
+nav {
+  line-height: 3;
+}
+
+input {
+  background: yellow;
+  line-height: 4;
+  width: 100%;
+  padding-left: 15px;
+}
+li {
+  background: yellow;
+  line-height: 3;
+  padding-left: 15px;
 }

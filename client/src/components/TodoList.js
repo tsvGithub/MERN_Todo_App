@@ -26,11 +26,15 @@ const TodoList = () => {
     });
 
   return (
-    <section>
+    <main className="container">
+      <nav>
+        <h1>TODO</h1>
+        <div className="switcher"></div>
+      </nav>
       {/*NB!send todos+setTodos for instant update*/}
       <Form todos={todos} setTodos={setTodos} />
-      {allTodos}
-    </section>
+      <section className="list">{allTodos}</section>
+    </main>
   );
 };
 

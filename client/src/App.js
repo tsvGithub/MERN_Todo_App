@@ -11,13 +11,14 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
+import "./App.css";
+
 function App() {
   return (
     <Router>
-      <>
+      <main classname="App">
         <Switch>
           <Route path="/">
-            {/* <Form /> */}
             <TodoList />
           </Route>
 
@@ -25,7 +26,7 @@ function App() {
             <TodoList />
           </Route> */}
         </Switch>
-      </>
+      </main>
     </Router>
     //Router from BrowserRouter
     // <Router>
