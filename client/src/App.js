@@ -16,7 +16,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      <main classname="App">
+      <>
         <Switch>
           <Route path="/">
             <TodoList />
@@ -26,7 +26,7 @@ function App() {
             <TodoList />
           </Route> */}
         </Switch>
-      </main>
+      </>
     </Router>
     //Router from BrowserRouter
     // <Router>

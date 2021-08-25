@@ -43,7 +43,7 @@ const Form = ({ todos, setTodos }) => {
           value={todo.todo}
           onChange={handleChange}
           required
-          placeholder="Please Enter Todo"
+          placeholder="Create a new todo..."
         />
       </form>
     </>
