@@ -8,38 +8,79 @@ import sun from "../assets/images/icon-sun.svg";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  console.log(todos);
+  // console.log(todos);
   const [isCompleted, setIsCompleted] = useState(false);
   //theme:
   const [mood, setMood] = useState("dark");
   //=======================
   const getTodos = async () => {
     const res = await axios.get("/todos");
-    console.log(res);
+    // console.log(res);
     setTodos(res.data.todos);
   };
   useEffect(() => {
     getTodos();
   }, []);
 
-  // const handleCheck = (index) => {
-  //   // const { name, checked } = e.target;
-  //   todos.filter();
+  const handleComplete = (id) => {
+    console.log(id); //0
+    // let updatedTodos = todos.map((todo) => {
+    //   console.log(todo);//
+    //   console.log(todo.id);//
+    //   if (todo.id == id) {
+    //     return { ...todo, isCompleted: !todo.isCompleted };
+    //   }
+    //   console.log(todo);
+    //   return todo;
+    // });
+    // setTodos({ todos: updatedTodos });
+    //--------------
+    setTodos((prevState) => {
+      let newTodos = [...prevState];
 
-  //   setIsCompleted(isCompleted === false ? true : false);
-  // };
+      // find and change specific item by its index
+      // let todo = newTodos[id];
+      // console.log(todo._id); //OK _id
+      // console.log(todo.isCompleted); //false
+      // todo.isCompleted = !todo.isCompleted;
+      // console.log(todo.isCompleted); //true
+      // console.log(todo);
+      // setTodo({
+      //   ...todo,
+      //   todo,
+      //   // isCompleted = !isCompleted
+      // });
+      // console.log(newTodos);
+      // let chanchedList = [{ ...newTodos, todo }];
+      // console.log(chanchedList);
+      // return chanchedList;
+      newTodos[id].isCompleted = !isCompleted;
+      return newTodos;
+    });
+    // const { name, checked } = e.target;
+
+    // setIsCompleted({ [name]: checked });
+
+    console.log(todos);
+    // const currentTodo = todos.find((todo, id) => todo.id === id);
+    // console.log(currentTodo);
+
+    // setIsCompleted(isCompleted === false ? true : false);
+    // console.log(isCompleted);
+  };
 
   const allTodos =
     todos.length > 0 &&
-    todos.map((todo, index) => {
+    todos.map((todo, id) => {
       return (
-        <li key={index}>
+        <li key={id}>
           <input
             type="checkbox"
             //state
             name="isCompleted"
-            checked={isCompleted}
-            // onChange={() => handleCheck(index)}
+            checked={todo.isCompleted}
+            onChange={() => handleComplete(id)}
+            // onChange={handleComplete(id)}
           />
           <Todo todo={todo} />
         </li>
