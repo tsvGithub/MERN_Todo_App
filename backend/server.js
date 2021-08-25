@@ -63,6 +63,26 @@ app.get("/todos", async (req, res) => {
     console.log(error);
   }
 });
+//UPDATE one todo:
+app.put("/todos/:id", async (req, res) => {
+  try {
+    const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, req.body);
+    // res.json({ todos: todo });
+    res.json(todo);
+  } catch (error) {
+    console.log(error);
+  }
+});
+//DELETE one todo:
+app.delete("/todos/:id", async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.id);
+    res.json("Todo deleted!");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // //===============================================
 // //CRUD
 // //READ

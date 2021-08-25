@@ -5,9 +5,11 @@ const Schema = mongoose.Schema;
 const Todo = new Schema({
   todo: {
     type: String,
+    required: true,
   },
   isCompleted: {
     type: Boolean,
+    default: false,
   },
   // description: {
   //   type: String,
