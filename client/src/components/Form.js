@@ -26,7 +26,7 @@ const Form = ({ todos, setTodos }) => {
       });
 
       //NB!!!todos+setTodos come from TodoList.js
-      //as it cause instant update!
+      //for instant update!
       setTodos([...todos, todo]);
       //clear state
       setTodo({ todo: "", isCompleted: false });

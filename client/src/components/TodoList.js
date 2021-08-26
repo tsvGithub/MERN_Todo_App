@@ -7,9 +7,13 @@ import moon from "./../assets/images/icon-moon.svg";
 import sun from "../assets/images/icon-sun.svg";
 
 const TodoList = () => {
+  const [todo, setTodo] = useState({
+    todo: "",
+    isCompleted: false,
+  });
+
   const [todos, setTodos] = useState([]);
   // console.log(todos);
-  const [isCompleted, setIsCompleted] = useState(false);
   //theme:
   const [mood, setMood] = useState("dark");
   //=======================
@@ -20,55 +24,20 @@ const TodoList = () => {
   };
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [todo]);
 
-  const handleComplete = (id) => {
-    console.log(id); //0
-    // let updatedTodos = todos.map((todo) => {
-    //   console.log(todo);//
-    //   console.log(todo.id);//
-    //   if (todo.id == id) {
-    //     return { ...todo, isCompleted: !todo.isCompleted };
-    //   }
-    //   console.log(todo);
-    //   return todo;
-    // });
-    // setTodos({ todos: updatedTodos });
-    //--------------
-    setTodos((prevState) => {
-      let newTodos = [...prevState];
+  const toggleComplete = async (todo) => {
+    // console.log(todo);
+    let newTodo = { ...todo };
+    // console.log(newTodo);
+    newTodo.isCompleted = !todo.isCompleted;
+    // console.log(newTodo);
 
-      // find and change specific item by its index
-      // let todo = newTodos[id];
-      // console.log(todo._id); //OK _id
-      // console.log(todo.isCompleted); //false
-      // todo.isCompleted = !todo.isCompleted;
-      // console.log(todo.isCompleted); //true
-      // console.log(todo);
-      // setTodo({
-      //   ...todo,
-      //   todo,
-      //   // isCompleted = !isCompleted
-      // });
-      // console.log(newTodos);
-      // let chanchedList = [{ ...newTodos, todo }];
-      // console.log(chanchedList);
-      // return chanchedList;
-      newTodos[id].isCompleted = !isCompleted;
-      return newTodos;
-    });
-    // const { name, checked } = e.target;
-
-    // setIsCompleted({ [name]: checked });
-
-    console.log(todos);
-    // const currentTodo = todos.find((todo, id) => todo.id === id);
-    // console.log(currentTodo);
-
-    // setIsCompleted(isCompleted === false ? true : false);
-    // console.log(isCompleted);
+    const res = await axios.put("/todos/" + newTodo._id, newTodo);
+    console.log(res);
+    setTodo(newTodo);
   };
-
+  //============
   const allTodos =
     todos.length > 0 &&
     todos.map((todo, id) => {
@@ -79,7 +48,8 @@ const TodoList = () => {
             //state
             name="isCompleted"
             checked={todo.isCompleted}
-            onChange={() => handleComplete(id)}
+            onChange={() => toggleComplete(todo)}
+            //too many rerenders:
             // onChange={handleComplete(id)}
           />
           <Todo todo={todo} />
@@ -101,7 +71,7 @@ const TodoList = () => {
             <img src={mood === "dark" ? moon : sun} />
           </button>
         </nav>
-        {/*NB!send todos+setTodos for instant update*/}
+        {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
         <Form todos={todos} setTodos={setTodos} />
         <section className="list">{allTodos}</section>
       </div>
