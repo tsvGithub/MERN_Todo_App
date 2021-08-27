@@ -43,15 +43,18 @@ const TodoList = () => {
     todos.map((todo, id) => {
       return (
         <li key={id}>
-          <input
-            type="checkbox"
-            //state
-            name="isCompleted"
-            checked={todo.isCompleted}
-            onChange={() => toggleComplete(todo)}
-            //too many rerenders:
-            // onChange={handleComplete(id)}
-          />
+          <label className="task">
+            <input
+              type="checkbox"
+              //state
+              name="isCompleted"
+              checked={todo.isCompleted}
+              onChange={() => toggleComplete(todo)}
+              //too many rerenders:
+              // onChange={handleComplete(id)}
+            />
+            <span className="checkmark"></span>
+          </label>
           <Todo todo={todo} />
         </li>
       );

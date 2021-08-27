@@ -51,7 +51,7 @@ Global Styles
 *,
 *:focus,
 *:active,
-*:hover,
+/* *:hover, */
 *:visited,
 *:focus-visible,
 *:focus-within,
@@ -121,12 +121,12 @@ input,
 li {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   line-height: 3;
   width: 100%;
   padding-left: 25px;
   background-color: var(--DT-Very-Dark-Desaturated-Blue);
-  caret-color: white;
+  caret-color: rgb(98, 22, 168);
   letter-spacing: var(--spacing);
   border-radius: var(--radius);
   -webkit-border-radius: var(--radius);
@@ -137,42 +137,115 @@ li {
   border-bottom-color: var(--DT-Very-Dark-Grayish-Blue);
   border-bottom-width: 1px;
   border-bottom-style: solid;
-}
-input[type="checkbox"] {
-  width: 10%;
-  background-image: url("./assets/images/icon-check.svg");
-}
-/* input[type="checkbox"] {
-  position: relative;
   cursor: pointer;
 }
-input[type="checkbox"]:before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 0;
-  left: 0;
-  border: 2px solid #555555;
-  border-radius: 50%;
-  background-color: white;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
+input[type="text"] {
+  color: inherit;
+  padding-left: 0;
+  border: none;
+  box-shadow: none;
+  cursor: auto;
 }
-input[type="checkbox"]:checked:after {
+form {
+  background-color: var(--DT-Very-Dark-Desaturated-Blue);
+  border-radius: var(--radius);
+  box-shadow: var(--dark-shadow);
+  border-bottom-color: var(--DT-Very-Dark-Grayish-Blue);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.circle {
+  display: flex;
+}
+.circle::before {
+  /* display: inline-block; */
   content: "";
+  margin: 0 25px;
+  align-self: center;
+  /* background: linear-gradient(to bottom right, #473abd, #813baa); */
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--DT-Very-Dark-Grayish-Blue);
+  cursor: default;
+}
+.line-through {
+  color: var(--DT-Dark-Grayish-Blue);
+  font-style: italic;
+  position: relative;
+}
+.line-through::after {
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+  content: "";
+  height: 0.05em;
+  left: -0.3rem;
+  margin-top: calc(0.05em / 2 * -1);
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+}
+input [type="checkbox"] {
   display: block;
+}
+.task {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+input[type="checkbox"] {
+  cursor: pointer;
+  visibility: hidden;
+  width: auto;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  border: 1px solid var(--DT-Dark-Grayish-Blue);
+}
+
+/* On mouse-over, add a gradient background color */
+.task:hover input ~ .checkmark {
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+}
+
+/* When the checkbox is checked, add a gradien background */
+.task input:checked ~ .checkmark {
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.task input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.task .checkmark:after {
+  left: 9px;
+  top: 5px;
   width: 5px;
   height: 10px;
-  border: solid black;
-  border-width: 0 2px 2px 0;
+  border: solid white;
+  border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  position: absolute;
-  top: 2px;
-  left: 6px;
-} */
+}

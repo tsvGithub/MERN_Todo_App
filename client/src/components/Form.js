@@ -37,14 +37,17 @@ const Form = ({ todos, setTodos }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="todo"
-          value={todo.todo}
-          onChange={handleChange}
-          required
-          placeholder="Create a new todo..."
-        />
+        <span for="todo-circle" className="circle">
+          <input
+            id="todo-circle"
+            type="text"
+            name="todo"
+            value={todo.todo}
+            onChange={handleChange}
+            required
+            placeholder="Create a new todo..."
+          />
+        </span>
       </form>
     </>
   );
