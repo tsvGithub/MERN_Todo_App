@@ -4,7 +4,8 @@ import Form from "./Form";
 import Todo from "./Todo";
 
 import moon from "./../assets/images/icon-moon.svg";
-import sun from "../assets/images/icon-sun.svg";
+import sun from "./../assets/images/icon-sun.svg";
+import cross from "./../assets/images/icon-cross.svg";
 
 const TodoList = () => {
   const [todo, setTodo] = useState({
@@ -37,6 +38,16 @@ const TodoList = () => {
     console.log(res);
     setTodo(newTodo);
   };
+
+  const handleDelete = async (_id) => {
+    console.log(_id);
+    const tasks = todos.filter((todo) => todo._id !== _id);
+    setTodos(tasks);
+    const res = await axios.delete("/todos/" + _id);
+    console.log(res);
+    console.log(todos);
+  };
+
   //============
   const allTodos =
     todos.length > 0 &&
@@ -56,6 +67,10 @@ const TodoList = () => {
             <span className="checkmark"></span>
           </label>
           <Todo todo={todo} />
+          <button className="cross" onClick={() => handleDelete(todo._id)}>
+            {/* <button onClick={() => handleDelete(id)}> */}
+            <img src={cross} />
+          </button>
         </li>
       );
     });
