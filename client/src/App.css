@@ -270,3 +270,20 @@ button.cross:hover {
   opacity: 1;
   cursor: pointer;
 }
+/*----Custom tooltip----*/
+[data-title] {
+  position: relative;
+  cursor: help;
+}
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -10px;
+  color: var(--DT-Light-Grayish-Blue);
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 0.8rem;
+  font-family: "Josefin Sans", sans-serif;
+  white-space: nowrap;
+}

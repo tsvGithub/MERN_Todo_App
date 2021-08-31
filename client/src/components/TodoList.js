@@ -28,11 +28,11 @@ const TodoList = () => {
   }, [todo]);
 
   const toggleComplete = async (todo) => {
-    // console.log(todo);
+    console.log(todo);
     let newTodo = { ...todo };
-    // console.log(newTodo);
+    console.log(newTodo);
     newTodo.isCompleted = !todo.isCompleted;
-    // console.log(newTodo);
+    console.log(newTodo);
 
     const res = await axios.put("/todos/" + newTodo._id, newTodo);
     console.log(res);
@@ -54,7 +54,7 @@ const TodoList = () => {
     todos.map((todo, id) => {
       return (
         <li key={id}>
-          <label className="task">
+          <label className="task" data-title="Todo completed?">
             <input
               type="checkbox"
               //state
@@ -67,7 +67,7 @@ const TodoList = () => {
             <span className="checkmark"></span>
           </label>
           <Todo todo={todo} />
-          <button className="cross" onClick={() => handleDelete(todo._id)}>
+          <button data-title="Delete todo?" className="cross" onClick={() => handleDelete(todo._id)}>
             {/* <button onClick={() => handleDelete(id)}> */}
             <img src={cross} />
           </button>
