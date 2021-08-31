@@ -25,7 +25,7 @@ const TodoList = () => {
   };
   useEffect(() => {
     getTodos();
-  }, [todo]);
+  }, [todo, setTodo]);
 
   const toggleComplete = async (todo) => {
     console.log(todo);
@@ -34,7 +34,8 @@ const TodoList = () => {
     newTodo.isCompleted = !todo.isCompleted;
     console.log(newTodo);
 
-    const res = await axios.put("/todos/" + newTodo._id, newTodo);
+    // const res = await axios.put("/todos/" + newTodo._id, newTodo);
+    const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
     console.log(res);
     setTodo(newTodo);
   };

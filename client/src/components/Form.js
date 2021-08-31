@@ -28,10 +28,14 @@ const Form = ({ todos, setTodos }) => {
       //NB!!!todos+setTodos come from TodoList.js
       //for instant update!
       setTodos([...todos, todo]);
+      console.log(todos);
       //clear state
       setTodo({ todo: "", isCompleted: false });
       console.log(res.data);
     }
+    const res = await axios.get("/todos");
+    console.log(res);
+    setTodos(res.data.todos);
   };
 
   return (
