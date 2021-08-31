@@ -50,9 +50,12 @@ const TodoList = () => {
   };
 
   //============
+  let todosReversed = [...todos].reverse();
+  // console.log(todosReversed);
   const allTodos =
-    todos.length > 0 &&
-    todos.map((todo, id) => {
+    todosReversed.length > 0 &&
+    todosReversed.map((todo, id) => {
+      console.log(todo);
       return (
         <li key={id}>
           <label className="task" data-title="Todo completed?">
@@ -80,7 +83,6 @@ const TodoList = () => {
     setMood(mood === "dark" ? "light" : "dark");
     console.log(mood);
   };
-
   return (
     <main className="wrapper">
       <div className="container">
