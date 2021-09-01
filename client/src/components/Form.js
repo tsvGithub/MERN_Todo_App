@@ -41,7 +41,7 @@ const Form = ({ todos, setTodos }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <span for="todo-circle" className="circle">
+        <span htmlFor="todo-circle" className="circle">
           <input
             id="todo-circle"
             type="text"
