@@ -8,7 +8,8 @@ import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
 //================================================================
-//'filters' object has keys with filters names,
+//FILTERS (1)
+//(1a)'filters' has keys with filters 'names' (All, Active, Completed),
 //and values are functions to filter 'todos' data
 //array (all/not completed/completed)
 const filters = {
@@ -16,9 +17,9 @@ const filters = {
   Active: (todo) => !todo.isCompleted,
   Completed: (todo) => todo.isCompleted,
 };
-//collect an array of filters names
+//(1b)collect an array of filters 'names' ([All, Active, Completed])
 const filtersNames = Object.keys(filters);
-console.log(filtersNames);
+// console.log(filtersNames);
 //==============================================
 
 const TodoList = () => {
@@ -28,7 +29,7 @@ const TodoList = () => {
     isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
-  //'All' filter applies because all tasks should be shown initially
+  //FILTERS (2) 'All' filter applies for initial state
   const [filter, setFilter] = useState("All");
   //theme:
   const [mood, setMood] = useState("dark");
@@ -51,8 +52,6 @@ const TodoList = () => {
     console.log(newTodo);
     newTodo.isCompleted = !todo.isCompleted;
     console.log(newTodo);
-
-    // const res = await axios.put("/todos/" + newTodo._id, newTodo);
     const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
     console.log(res);
     setTodo(newTodo);
@@ -66,11 +65,14 @@ const TodoList = () => {
     console.log(res);
     console.log(todos);
   };
+  //-------------
+  //FILTERS (6)
+  const itemsLeft = todos.filter(filters["Active"]).length;
   //-----------------
-  let todosReversed = [...todos].reverse();
-  // console.log(todosReversed);
+  let todosReversed = [...todos].reverse(); //last item goes first
   const allTodos =
     todosReversed.length > 0 &&
+    //FILTERS (4) set filters .filter(filters[filter]) for each item
     todosReversed.filter(filters[filter]).map((todo, id) => {
       // todosReversed.map((todo, id) => {
       return (
@@ -96,11 +98,10 @@ const TodoList = () => {
       );
     });
   //----------------
-  //Filter:
+  //FILTER (3)
   const filterList = filtersNames.map((name) => (
     //filters
     <button
-      //
       className="filter"
       onClick={() => setFilter(name)}
       // aria-pressed={name === filter}
@@ -108,7 +109,6 @@ const TodoList = () => {
       {name}
     </button>
   ));
-
   //---------------
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
@@ -128,7 +128,10 @@ const TodoList = () => {
         {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
         <Form todos={todos} setTodos={setTodos} />
         <ul>
+          <li>{itemsLeft} items left</li>
+          {/*Filters (5) */}
           <li>{filterList}</li>
+          <li>Clear completed</li>
         </ul>
 
         <section className="list">{allTodos}</section>
