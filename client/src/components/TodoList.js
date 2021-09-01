@@ -102,13 +102,20 @@ const TodoList = () => {
   const filterList = filtersNames.map((name) => (
     //filters
     <button
-      className="filter"
+      className={filter === name ? "current filter-btn" : "filter-btn"}
       onClick={() => setFilter(name)}
-      // aria-pressed={name === filter}
+      aria-pressed={name === filter}
     >
+      {/* <button className="filter-btn " onClick={() => setFilter(name)} aria-pressed={name === filter}> */}
       {name}
     </button>
   ));
+  const clearCompleted = () => {
+    // console.log("Clear completed!");
+    const activeTodos = todos.filter((todo) => !todo.isCompleted);
+    // console.log(activeTodos);
+    setTodos(activeTodos);
+  };
   //---------------
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
@@ -127,11 +134,15 @@ const TodoList = () => {
         </nav>
         {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
         <Form todos={todos} setTodos={setTodos} />
-        <ul>
+        <ul className="filter">
           <li>{itemsLeft} items left</li>
           {/*Filters (5) */}
-          <li>{filterList}</li>
-          <li>Clear completed</li>
+          <li className="filter-list">{filterList}</li>
+          <li>
+            <button className="filter-btn" onClick={clearCompleted}>
+              Clear completed
+            </button>
+          </li>
         </ul>
 
         <section className="list">{allTodos}</section>

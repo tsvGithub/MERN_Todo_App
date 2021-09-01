@@ -131,15 +131,11 @@ li {
   width: 100%;
   height: 4rem;
   padding-left: 25px;
-  /* letter-spacing: -0.125rem; */
+  /*letter-spacing: -0.125rem;*/
   background-color: var(--DT-Very-Dark-Desaturated-Blue);
   caret-color: rgb(98, 22, 168);
-  /* letter-spacing: var(--spacing); */
+  /*letter-spacing: var(--spacing);  */
   border-radius: var(--radius);
-  -webkit-border-radius: var(--radius);
-  -moz-border-radius: var(--radius);
-  -ms-border-radius: var(--radius);
-  -o-border-radius: var(--radius);
   box-shadow: var(--dark-shadow);
   border-bottom-color: var(--DT-Very-Dark-Grayish-Blue);
   border-bottom-width: 1px;
@@ -286,4 +282,53 @@ button.cross:hover {
   font-size: 0.8rem;
   font-family: "Josefin Sans", sans-serif;
   white-space: nowrap;
+}
+/*------------Filters------------------ */
+ul.filter {
+  display: flex;
+  justify-content: space-around;
+  background: var(--DT-Very-Dark-Desaturated-Blue);
+}
+ul.filter > li {
+  flex: 2;
+  font-size: clamp(0.6rem, 0.8rem, 1rem);
+  padding-left: 0;
+  justify-content: space-evenly;
+  gap: 0;
+  border: none;
+  box-shadow: none;
+  color: var(--DT-Dark-Grayish-Blue);
+}
+ul.filter > li:hover {
+  color: var(--DT-Light-Grayish-Blue-hover);
+}
+ul.filter > li:first-of-type {
+  cursor: default;
+}
+ul.filter > li:first-of-type:hover {
+  color: var(--DT-Dark-Grayish-Blue);
+}
+ul.filter > li.filter-list {
+  flex: 3;
+}
+button.filter-btn {
+  background: transparent;
+  color: var(--DT-Dark-Grayish-Blue);
+  font-size: clamp(0.6rem, 0.8rem, 1rem);
+  cursor: pointer;
+}
+/*gradient text*/
+button.current {
+  background-image: linear-gradient(to bottom right, #473abd, #813baa);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+button.filter-btn:hover {
+  color: var(--DT-Light-Grayish-Blue-hover);
 }
