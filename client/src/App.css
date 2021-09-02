@@ -332,3 +332,22 @@ button.current {
 button.filter-btn:hover {
   color: var(--DT-Light-Grayish-Blue-hover);
 }
+
+@media screen and (max-width: 48em) {
+  ul.filter {
+    flex-flow: row wrap;
+  }
+  ul.filter > li {
+    flex: 1 50%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-color: var(--DT-Very-Dark-Grayish-Blue);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  ul.filter li.filter-list {
+    order: 3;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

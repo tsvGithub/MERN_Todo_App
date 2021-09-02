@@ -41,6 +41,11 @@ const TodoList = () => {
     // console.log(res);
     setTodos(res.data.todos);
   };
+  const getCompleted = async () => {
+    const res = await axios.get("/todos/completed");
+    console.log(res);
+  };
+
   //-------------
   useEffect(() => {
     getTodos();
@@ -61,7 +66,7 @@ const TodoList = () => {
     console.log(_id);
     const tasks = todos.filter((todo) => todo._id !== _id);
     setTodos(tasks);
-    const res = await axios.delete("/todos/" + _id);
+    const res = await axios.delete(`/todos/${_id}`);
     console.log(res);
     console.log(todos);
   };
@@ -112,9 +117,11 @@ const TodoList = () => {
   ));
   const clearCompleted = () => {
     // console.log("Clear completed!");
-    const activeTodos = todos.filter((todo) => !todo.isCompleted);
-    // console.log(activeTodos);
-    setTodos(activeTodos);
+    // const activeTodos = todos.filter((todo) => !todo.isCompleted);
+    // // console.log(activeTodos);
+    // setTodos(activeTodos);
+    //====================
+    getCompleted();
   };
   //---------------
   const switchMood = () => {

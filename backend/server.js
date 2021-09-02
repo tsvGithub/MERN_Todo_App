@@ -63,6 +63,14 @@ app.get("/todos", async (req, res) => {
     console.log(error);
   }
 });
+app.get("/todos/completed", async (req, res) => {
+  try {
+    const completed = await Todo.find({ isCompleted: true });
+    res.json({ completed: completed });
+  } catch (error) {
+    console.log(error);
+  }
+});
 //UPDATE one todo:
 app.put("/todos/:id", async (req, res) => {
   try {
