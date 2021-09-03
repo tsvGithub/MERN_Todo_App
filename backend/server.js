@@ -63,14 +63,15 @@ app.get("/todos", async (req, res) => {
     console.log(error);
   }
 });
-app.get("/todos/completed", async (req, res) => {
-  try {
-    const completed = await Todo.find({ isCompleted: true });
-    res.json({ completed: completed });
-  } catch (error) {
-    console.log(error);
-  }
-});
+// app.get("/todos/completed", async (req, res) => {
+//   try {
+//     const completed = await Todo.find({ isCompleted: true });
+//     console.log(completed);
+//     res.json({ completed: completed });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 //UPDATE one todo:
 app.put("/todos/:id", async (req, res) => {
   try {
@@ -90,6 +91,61 @@ app.delete("/todos/:id", async (req, res) => {
     console.log(error);
   }
 });
+
+// Todo.deleteMany({ isCompleted: true })
+//   .then(function () {
+//     console.log("Data deleted");
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+
+app.delete("/todos", async (req, res) => {
+  // if (!mongoose.Types.ObjectId.isValid(id)) return false;
+  // console.log(req);
+  const result = await Todo.deleteMany({ isCompleted: true })
+    .then(function () {
+      console.log("Completed Todos deleted");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  // console.log(`Deleted ${result.deletedCount} todos...`);
+
+  res.json("Completed Todos deleted!");
+
+  // try {
+  //   // const completed = await Todo.find({ isCompleted: true });
+  //   const completed = { isCompleted: true };
+  //   // console.log(completed);
+  //   // res.json(completed);
+  //   const deleteCompleted = await Todo.deleteMany(completed, function (err, result) {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   });
+  //   // // const completed = await Todo.deleteMany({ isCompleted: true });
+  //   // // console.log(completed);
+  //   // console.log(`Deleted ${result} todos...`);
+  //   console.log(`Deleted ${deleteCompleted.deletedCount} todos...`);
+  //   res.json("Completed Todos deleted!");
+  //   // // res.json({ completed: result });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+});
+// router.route("/delete").delete(function (req, res) {
+//   kennels.deleteMany({ breed: "Labrador" }, function (err, result) {
+//     if (err) {
+//       res.send(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
 
 // //===============================================
 // //CRUD

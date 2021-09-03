@@ -41,10 +41,10 @@ const TodoList = () => {
     // console.log(res);
     setTodos(res.data.todos);
   };
-  const getCompleted = async () => {
-    const res = await axios.get("/todos/completed");
-    console.log(res);
-  };
+  // const getCompleted = async () => {
+  //   const res = await axios.get("/todos/completed");
+  //   console.log(res);
+  // };
 
   //-------------
   useEffect(() => {
@@ -70,6 +70,18 @@ const TodoList = () => {
     console.log(res);
     console.log(todos);
   };
+  const getCompleted = async () => {
+    const res = await axios.delete("/todos");
+    console.log(res);
+  };
+  const clearCompleted = () => {
+    console.log("Clear completed!");
+    const activeTodos = todos.filter((todo) => !todo.isCompleted);
+    // console.log(activeTodos);
+    setTodos(activeTodos);
+    getCompleted();
+  };
+
   //-------------
   //FILTERS (6)
   const itemsLeft = todos.filter(filters["Active"]).length;
@@ -115,14 +127,14 @@ const TodoList = () => {
       {name}
     </button>
   ));
-  const clearCompleted = () => {
-    // console.log("Clear completed!");
-    // const activeTodos = todos.filter((todo) => !todo.isCompleted);
-    // // console.log(activeTodos);
-    // setTodos(activeTodos);
-    //====================
-    getCompleted();
-  };
+  // const clearCompleted = () => {
+  //   // console.log("Clear completed!");
+  //   // const activeTodos = todos.filter((todo) => !todo.isCompleted);
+  //   // // console.log(activeTodos);
+  //   // setTodos(activeTodos);
+  //   //====================
+  //   getCompleted();
+  // };
   //---------------
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
