@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 // import Todo from "./Todo";
 import axios from "axios";
-const Form = ({ todos, setTodos }) => {
+const Form = ({ todos, setTodos, mood }) => {
   const [todo, setTodo] = useState({
     todo: "",
     isCompleted: false,
   });
-
+  // console.log(mood);
+  //------------------------
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -41,7 +42,7 @@ const Form = ({ todos, setTodos }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <span htmlFor="todo-circle" className="circle">
+        <span htmlFor="todo-circle" className={`circle input-${mood} `}>
           <input
             id="todo-circle"
             type="text"
@@ -49,6 +50,7 @@ const Form = ({ todos, setTodos }) => {
             value={todo.todo}
             onChange={handleChange}
             required
+            className={`input input-${mood}`}
             placeholder="Create a new todo..."
           />
         </span>

@@ -93,7 +93,7 @@ const TodoList = () => {
     todosReversed.filter(filters[filter]).map((todo, id) => {
       // todosReversed.map((todo, id) => {
       return (
-        <li key={id}>
+        <li className={`input-${mood}`} key={id}>
           <label className="task" data-title="Todo completed?">
             <input
               type="checkbox"
@@ -106,7 +106,7 @@ const TodoList = () => {
             />
             <span className="checkmark"></span>
           </label>
-          <Todo todo={todo} />
+          <Todo todo={todo} mood={mood} />
           <button data-title="Delete todo?" className="cross" onClick={() => handleDelete(todo._id)}>
             {/* <button onClick={() => handleDelete(id)}> */}
             <img src={cross} />
@@ -138,22 +138,21 @@ const TodoList = () => {
   //---------------
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
-    console.log(mood);
+    // console.log(mood);
   };
-
   //====================
   return (
-    <main className="wrapper">
+    <main className={`wrapper wrapper-${mood}`}>
       <div className="container">
         <nav>
           <h1>TODO</h1>
           <button className="switcher" onClick={switchMood}>
-            <img src={mood === "dark" ? moon : sun} />
+            <img src={mood === "dark" ? sun : moon} />
           </button>
         </nav>
         {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
-        <Form todos={todos} setTodos={setTodos} />
-        <ul className="filter">
+        <Form todos={todos} mood={mood} setTodos={setTodos} />
+        <ul className={`filter filter-${mood} input-${mood}`}>
           <li>{itemsLeft} items left</li>
           {/*Filters (5) */}
           <li className="filter-list">{filterList}</li>
