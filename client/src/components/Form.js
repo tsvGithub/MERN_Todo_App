@@ -40,7 +40,7 @@ const Form = ({ todos, setTodos, mood }) => {
   };
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit}>
         <span htmlFor="todo-circle" className={`circle input-${mood} `}>
           <input
@@ -55,7 +55,7 @@ const Form = ({ todos, setTodos, mood }) => {
           />
         </span>
       </form>
-    </>
+    </div>
   );
 };
 

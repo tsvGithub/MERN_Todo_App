@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+//sortable + array move:
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
+
 import Form from "./Form";
 import Todo from "./Todo";
 
@@ -23,7 +27,7 @@ const filtersNames = Object.keys(filters);
 //==============================================
 
 const TodoList = () => {
-  //State here:
+  //State:
   const [todo, setTodo] = useState({
     todo: "",
     isCompleted: false,
@@ -86,6 +90,8 @@ const TodoList = () => {
   //FILTERS (6)
   const itemsLeft = todos.filter(filters["Active"]).length;
   //-----------------
+  //--------------------
+  //All Todos:
   let todosReversed = [...todos].reverse(); //last item goes first
   const allTodos =
     todosReversed.length > 0 &&
@@ -162,6 +168,9 @@ const TodoList = () => {
             </button>
           </li>
         </ul>
+
+        {/* {allTodos} */}
+        {/* <ul className="list">{allTodos}</ul> */}
 
         <section className="list">{allTodos}</section>
       </div>

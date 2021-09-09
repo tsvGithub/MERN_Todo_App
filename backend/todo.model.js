@@ -12,6 +12,11 @@ const Todo = new Schema({
     type: Boolean,
     default: false,
   },
+  //sorting for sortable
+  sorting: {
+    type: Number,
+    default: 0,
+  },
   // description: {
   //   type: String,
   // },

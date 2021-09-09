@@ -122,14 +122,15 @@ h1 {
 }
 
 .switcher {
+  -ms-flex-item-align: center;
   align-self: center;
   background: transparent;
   cursor: pointer;
-  transition: var(--transition);
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
   -ms-transition: var(--transition);
   -o-transition: var(--transition);
+  transition: var(--transition);
 }
 .switcher img {
   color: var(--DT-Light-Grayish-Blue);
@@ -302,8 +303,12 @@ button.cross:hover {
   bottom: -10px;
   color: var(--DT-Light-Grayish-Blue);
   background: linear-gradient(to bottom right, #473abd, #813baa);
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
   font-size: 0.8rem;
   font-family: "Josefin Sans", sans-serif;
   white-space: nowrap;
@@ -358,10 +363,11 @@ button.current {
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
+  -moz-background-clip: text;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
 

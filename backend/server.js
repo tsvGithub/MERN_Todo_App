@@ -37,18 +37,28 @@ const connection = mongoose.connection;
 connection.once("open", function () {
   console.log("MongoDB connected");
 });
+//----
+// mongoose.connect("mongodb://localhost/react-sortdb", {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+// });
 //===========
 //============
 //Routes:
 //POST a new todo on DB:
 app.post("/todos", async (req, res) => {
   try {
-    await Todo.create({
-      todo: req.body.todo,
-      isCompleted: false,
-    });
+    // await Todo.create({
+    //   todo: req.body.todo,
+    //   isCompleted: false,
+    // });
     // console.log(req.body);
-    res.json({ status: "success" });
+    // res.json({ status: "success" });
+    //09.09.
+    const todo = new Todo(req.body);
+    todo.sorting = await Todo.estimatedDocumentCount();
+    await todo.save();
+    res.json(todo);
   } catch (err) {
     console.log(err);
   }
@@ -57,21 +67,22 @@ app.post("/todos", async (req, res) => {
 app.get("/todos", async (req, res) => {
   try {
     const todos = await Todo.find();
-    res.json({ todos: todos });
+    // res.json({ todos: todos });
+    res.json({ todos });
   } catch (error) {
     console.log(error);
   }
 });
 //GET completed todos :
-// app.get("/todos/completed", async (req, res) => {
-//   try {
-//     const completed = await Todo.find({ isCompleted: true });
-//     console.log(completed);
-//     res.json({ completed: completed });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+app.get("/todos/completed", async (req, res) => {
+  try {
+    const completed = await Todo.find({ isCompleted: true });
+    console.log(completed);
+    res.json({ completed: completed });
+  } catch (error) {
+    console.log(error);
+  }
+});
 //UPDATE one todo:
 app.put("/todos/:id", async (req, res) => {
   try {
@@ -81,6 +92,15 @@ app.put("/todos/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+//Update todos:
+app.put("/todos", async (req, res) => {
+  const todosIds = req.body;
+  for (const [i, id] of todosIds.entries()) {
+    await Todo.updateOne({ _id: id }, { sorting: i });
+    console.log(i, id);
+  }
+  res.json("The list was ordered!");
 });
 //DELETE one todo:
 app.delete("/todos/:id", async (req, res) => {
