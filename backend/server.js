@@ -57,7 +57,12 @@ app.post("/todos", async (req, res) => {
     //09.09.
     const todo = new Todo(req.body);
     todo.sorting = await Todo.estimatedDocumentCount();
+    // console.log(todo.sorting);
     await todo.save();
+    //-------14.09
+    // const todos = await Todo.find().sort({ _id: -1 });
+    // await Todo.find().sort({ sorting: -1 });
+    //--------14.09.xxx
     res.json(todo);
   } catch (err) {
     console.log(err);
@@ -67,6 +72,9 @@ app.post("/todos", async (req, res) => {
 app.get("/todos", async (req, res) => {
   try {
     const todos = await Todo.find();
+    // const todos = await Todo.find().sort({ sorting: -1 });
+    // db.collection.find().sort({ age: -1 });
+    // console.log(todos);
     // res.json({ todos: todos });
     res.json({ todos });
   } catch (error) {
@@ -100,7 +108,11 @@ app.put("/todos", async (req, res) => {
     await Todo.updateOne({ _id: id }, { sorting: i });
     console.log(i, id);
   }
-  res.json("The list was ordered!");
+  const todos = await Todo.find();
+  // const todos = await Todo.find().sort({ sorting: -1 });
+  console.log(todos);
+  // res.json("The list was ordered!");
+  res.json(todos);
 });
 //DELETE one todo:
 app.delete("/todos/:id", async (req, res) => {

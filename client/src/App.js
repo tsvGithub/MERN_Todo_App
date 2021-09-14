@@ -1,35 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-// import CreateTodo from "./components/create-todo.component";
-// import EditTodo from "./components/edit-todo.component";
-// import TodosList from "./components/todo-list.component";
-
-// import TodosList from "./components/TodoList";
-
-// import logo from "./logo.png";
-import Form from "./components/Form";
 import TodoList from "./components/TodoList";
-
-import Main from "./components/Main";
+import TodoList2 from "./components/TodoList2";
+import { AppProvider } from "./context";
 import "./App.css";
 
+//I-> II. context.js
 function App() {
   return (
-    <Router>
-      <div>
+    //wrap whole app into AppProvider
+    <AppProvider>
+      <Router>
         <Switch>
           <Route path="/">
+            <TodoList2 />
             {/* <TodoList /> */}
-            <Main />
           </Route>
-
-          {/* <Route path="/">
-            <TodoList />
-          </Route> */}
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </AppProvider>
+
     //Router from BrowserRouter
     // <Router>
     //   <div className="container">

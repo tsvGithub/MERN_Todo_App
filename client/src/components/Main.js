@@ -42,7 +42,7 @@ const SortableComponent = () => {
     isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
-  console.log(todos); //- //ok
+  // console.log(todos); //- //ok
 
   const getData = async () => {
     // const res = await fetch("/todos");
@@ -53,9 +53,9 @@ const SortableComponent = () => {
     // setTodos(tasks);
     //------
     const res = await axios.get("/todos");
-    console.log(res); //ok all infos
+    // console.log(res); //ok all infos
     const tasks = await res.data.todos;
-    console.log(tasks); //ok [todos]
+    // console.log(tasks); //ok [todos]
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
     setTodos(tasks);
   };
@@ -65,15 +65,15 @@ const SortableComponent = () => {
   }, []);
 
   const onSortEnd = async ({ oldIndex, newIndex }) => {
-    console.log(todos);
+    // console.log(todos);
     let tasksCopy = [...todos];
     tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
     setTodos(tasksCopy);
-    console.log(tasksCopy);
+    // console.log(tasksCopy);
     const tasksIds = tasksCopy.map((t) => t._id);
-    console.log(tasksIds);
+    // console.log(tasksIds);
     const res = await axios.put(`/todos`, tasksIds);
-    console.log(res);
+    // console.log(res);
     //   const res = await fetch("/todos", {
     //     method: "PUT",
     //     headers: {
@@ -116,7 +116,7 @@ const SortableComponent = () => {
       </li>
     );
   });
-  console.log(todos);
+  // console.log(todos);
   return (
     <div>
       <h1>Hello!</h1>
