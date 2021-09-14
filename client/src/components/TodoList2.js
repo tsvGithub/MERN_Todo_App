@@ -35,7 +35,6 @@ const SortableItem = SortableElement(({ todo }) => {
         //
         onClick={() => handleDelete(todo._id)}
       >
-        {/* <button onClick={() => handleDelete(id)}> */}
         <img src={cross} />
       </button>
     </li>
@@ -44,7 +43,7 @@ const SortableItem = SortableElement(({ todo }) => {
 
 const SortableList = SortableContainer(({ items }) => {
   const { handleDelete, toggleComplete } = useGlobalContext();
-  console.log(items);
+  //   console.log(items);
   let itemsReversed = [...items].reverse();
   return (
     <ul className="list-group">
@@ -75,7 +74,6 @@ const TodoList2 = () => {
     filters,
     filtersNames,
     getTodos,
-    getCompleted,
     toggleComplete,
     handleDelete,
     clearCompleted,

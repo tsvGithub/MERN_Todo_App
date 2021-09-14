@@ -35,24 +35,50 @@ const AppProvider = ({ children }) => {
   const [mood, setMood] = useState("dark");
   //-------------------------
 
-  //functions
   //=======================
+  //Form:
+  const changeForm = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    // const { name, value, checked, type } = e.target;
+    // type === "checkbox" ? setTodo({ ...todo, [name]: checked }) : setTodo({ ...todo, [name]: value });
+    setTodo({
+      ...todo,
+      [name]: value,
+    });
+  };
+  const submitForm = async (e) => {
+    e.preventDefault();
+    // console.log(`context submitForm todo.todo ${todo.todo}`);
+    if (todo.todo) {
+      const todoFromInput = JSON.stringify({
+        todo: todo.todo,
+      });
+      const res = await axios.post("/todos", todoFromInput, {
+        headers: { "Content-Type": "application/json" },
+      });
+      //for instant update!
+      setTodos([...todos, todo]);
+      //clear state
+      setTodo({ todo: "", isCompleted: false });
+      //   console.log(res.data);
+    }
+    const res = await axios.get("/todos");
+    console.log(res);
+    setTodos(res.data.todos);
+  };
+  //=========================
   const getTodos = async () => {
     const res = await axios.get("/todos");
-    // console.log(res); //ok all infos
+    // console.log(`getTodos context 'res': ${res}`); //ok all infos
     const tasks = await res.data.todos;
     // console.log(tasks); //ok [todos]
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
     setTodos(tasks);
   };
-
-  //   useEffect(() => {
-  //     getTodos();
-  //   }, [todo, setTodo]);
   //--------------
   const toggleComplete = async (todo) => {
     // console.log(todo);
-    console.log(`Hello ${todo.isCompleted} from ToggleComplete!`);
     let newTodo = { ...todo };
     // console.log(newTodo);
     newTodo.isCompleted = !todo.isCompleted;
@@ -60,8 +86,11 @@ const AppProvider = ({ children }) => {
     const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
     // console.log(res);
     setTodo(newTodo);
+    //clear input
+    setTodo({ todo: "" });
   };
   //---------------
+  //Sortable:
   const onSortEnd = async ({ oldIndex, newIndex }) => {
     // console.log(todos);
     let tasksCopy = [...todos];
@@ -75,7 +104,7 @@ const AppProvider = ({ children }) => {
     getTodos();
   };
   //-----------------
-
+  //Delete One Todo:
   const handleDelete = async (_id) => {
     console.log("Handle delete");
     console.log(_id);
@@ -85,16 +114,12 @@ const AppProvider = ({ children }) => {
     console.log(res);
     console.log(todos);
   };
-  const getCompleted = async () => {
-    const res = await axios.delete("/todos");
-    // console.log(res);
-  };
-  const clearCompleted = () => {
-    console.log("Clear completed!");
+  //Delete completed Todos:
+  const clearCompleted = async () => {
     const activeTodos = todos.filter((todo) => !todo.isCompleted);
     // console.log(activeTodos);
     setTodos(activeTodos);
-    getCompleted();
+    await axios.delete("/todos");
   };
   //-------------
   //FILTERS (6)
@@ -108,14 +133,12 @@ const AppProvider = ({ children }) => {
       onClick={() => setFilter(name)}
       aria-pressed={name === filter}
     >
-      {/* <button className="filter-btn " onClick={() => setFilter(name)} aria-pressed={name === filter}> */}
       {name}
     </button>
   ));
   //---------------
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
-    // console.log(mood);
   };
   useEffect(() => {
     getTodos();
@@ -123,38 +146,6 @@ const AppProvider = ({ children }) => {
 
   //====================
 
-  const allTasks = todos.map((todo, id) => {
-    // todosReversed.map((todo, id) => {
-    // console.log(todo); //    ok;
-    return (
-      <li key={id}>
-        <label className="task" data-title="Todo completed?">
-          <input
-            type="checkbox"
-            //state
-            name="isCompleted"
-            // checked={todo.isCompleted}
-            // onChange={() => toggleComplete(todo)}
-            //too many rerenders:
-            // onChange={handleComplete(id)}
-          />
-          <span className="checkmark"></span>
-        </label>
-
-        {todo.todo}
-
-        <button
-          data-title="Delete todo?"
-          className="cross"
-          //  onClick={() => handleDelete(todo._id)}
-        >
-          {/* <button onClick={() => handleDelete(id)}> */}
-          {/* <img src={cross} /> */}
-        </button>
-      </li>
-    );
-  });
-  // console.log(todos);
   return (
     <AppContext.Provider
       value={{
@@ -169,7 +160,6 @@ const AppProvider = ({ children }) => {
         filters,
         filtersNames,
         getTodos,
-        getCompleted,
         toggleComplete,
         handleDelete,
         clearCompleted,
@@ -177,6 +167,8 @@ const AppProvider = ({ children }) => {
         onSortEnd,
         filterList,
         switchMood,
+        changeForm,
+        submitForm,
       }}
     >
       {children}

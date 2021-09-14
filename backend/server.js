@@ -95,8 +95,8 @@ app.get("/todos/completed", async (req, res) => {
 app.put("/todos/:id", async (req, res) => {
   try {
     const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, req.body);
-    // res.json({ todos: todo });
-    res.json(todo);
+    res.json({ todo: todo });
+    // res.json(todo);
   } catch (error) {
     console.log(error);
   }
@@ -108,11 +108,11 @@ app.put("/todos", async (req, res) => {
     await Todo.updateOne({ _id: id }, { sorting: i });
     console.log(i, id);
   }
-  const todos = await Todo.find();
+  // const todos = await Todo.find();
   // const todos = await Todo.find().sort({ sorting: -1 });
-  console.log(todos);
-  // res.json("The list was ordered!");
-  res.json(todos);
+  // console.log(todos);
+  res.json("The list was ordered!");
+  // res.json(todos);
 });
 //DELETE one todo:
 app.delete("/todos/:id", async (req, res) => {
