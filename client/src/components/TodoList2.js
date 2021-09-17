@@ -11,10 +11,10 @@ import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
 const SortableItem = SortableElement(({ todo }) => {
-  const { toggleComplete, handleDelete, mood } = useGlobalContext();
-  //   console.log(`TodoList2 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
+  const { toggleComplete, handleDelete, mood, filters, filtersNames } = useGlobalContext();
+  // console.log(`TodoList2 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
   return (
-    <li>
+    <li className={`input-${mood}`} key={todo._id}>
       <label className="task" data-title="Todo completed?">
         <input
           type="checkbox"
@@ -42,13 +42,27 @@ const SortableItem = SortableElement(({ todo }) => {
 });
 
 const SortableList = SortableContainer(({ items }) => {
-  const { handleDelete, toggleComplete } = useGlobalContext();
-  //   console.log(items);
-  let itemsReversed = [...items].reverse();
+  const { handleDelete, toggleComplete, filters, filter, filtersNames, todos } = useGlobalContext();
+  // items.map((item, i) => {
+  //   console.log(item, i);
+  // });
+  //   let itemsReversed = [...items].reverse();
+  //   items = items.reverse();
+  //   items = todos.reverse();
+  //   items.map((item, i) => {
+  //     console.log(item, i);
+  //     // console.log(`Items reverse map ${(item, i)}`);
+  //   });
+  //   todos.map((item, i) => {
+  //     console.log(item, i);
+  //     // console.log(`Todos map after Items ${(item, i)}`);
+  //   });
   return (
     <ul className="list-group">
       {/* {itemsReversed.map((todo, index) => ( */}
-      {items.map((todo, index) => (
+      {/* {items.reverse().map((todo, index) => ( */}
+      {/* //   {items.map((todo, index) => ( */}
+      {items.filter(filters[filter]).map((todo, index) => (
         <SortableItem
           key={`item-${index}`}
           index={index}

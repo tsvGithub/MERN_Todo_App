@@ -4,7 +4,9 @@ const Todo = ({ todo, mood }) => {
   // console.log(mood);
   return (
     <div className={todo.isCompleted ? `line-through line-through-${mood}` : ""}>
-      {todo.todo}, {todo.sorting}, {todo._id}
+      {todo.todo}
+      {/* {todo.sorting} */}
+      {/* {todo._id} */}
     </div>
   );
 };

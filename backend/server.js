@@ -72,9 +72,9 @@ app.post("/todos", async (req, res) => {
 app.get("/todos", async (req, res) => {
   try {
     const todos = await Todo.find();
-    // const todos = await Todo.find().sort({ sorting: -1 });
+    // const todos = await Todo.find().sort({ _id: -1 });
     // db.collection.find().sort({ age: -1 });
-    // console.log(todos);
+    // console.log(todos); //reversed todos
     // res.json({ todos: todos });
     res.json({ todos });
   } catch (error) {
@@ -85,7 +85,7 @@ app.get("/todos", async (req, res) => {
 app.get("/todos/completed", async (req, res) => {
   try {
     const completed = await Todo.find({ isCompleted: true });
-    console.log(completed);
+    // console.log(completed);
     res.json({ completed: completed });
   } catch (error) {
     console.log(error);
@@ -95,8 +95,7 @@ app.get("/todos/completed", async (req, res) => {
 app.put("/todos/:id", async (req, res) => {
   try {
     const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, req.body);
-    res.json({ todo: todo });
-    // res.json(todo);
+    res.json(todo);
   } catch (error) {
     console.log(error);
   }
@@ -106,13 +105,12 @@ app.put("/todos", async (req, res) => {
   const todosIds = req.body;
   for (const [i, id] of todosIds.entries()) {
     await Todo.updateOne({ _id: id }, { sorting: i });
-    console.log(i, id);
+    // console.log(i, id);
   }
-  // const todos = await Todo.find();
-  // const todos = await Todo.find().sort({ sorting: -1 });
+  const todos = await Todo.find();
   // console.log(todos);
-  res.json("The list was ordered!");
-  // res.json(todos);
+  // res.json("The list was ordered!");
+  res.json(todos);
 });
 //DELETE one todo:
 app.delete("/todos/:id", async (req, res) => {

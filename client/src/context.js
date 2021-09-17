@@ -18,6 +18,22 @@ const filters = {
 //(1b)collect an array of filters 'names' ([All, Active, Completed])
 const filtersNames = Object.keys(filters);
 // console.log(filtersNames);
+
+//=============================
+//THEME (1)
+//localStorage for user preferences
+//Application=>localStorage: key-value
+const getStorageTheme = () => {
+  let mood = "dark";
+  //'mood'=>key; if the kye exists
+  //set 'value' to the value that was passed
+  if (localStorage.getItem("mood")) {
+    mood = localStorage.getItem("mood");
+  }
+  //return default value or value of the key from localStorage.
+  return mood;
+};
+
 //==============================================
 
 //II. (I.App.js + III. TodoList.js)
@@ -31,17 +47,20 @@ const AppProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   //FILTERS (2) 'All' filter applies for initial state
   const [filter, setFilter] = useState("All");
-  //theme:
-  const [mood, setMood] = useState("dark");
+  //THEME (2):
+  // const [mood, setMood] = useState("dark");
+  //theme state with user preferences
+  const [mood, setMood] = useState(getStorageTheme());
+
   //-------------------------
 
   //=======================
   //Form:
   const changeForm = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    // const { name, value, checked, type } = e.target;
-    // type === "checkbox" ? setTodo({ ...todo, [name]: checked }) : setTodo({ ...todo, [name]: value });
+    // const name = e.target.name;
+    // const value = e.target.value;
+    const { name, value, checked, type } = e.target;
+    type === "checkbox" ? setTodo({ ...todo, [name]: checked }) : setTodo({ ...todo, [name]: value });
     setTodo({
       ...todo,
       [name]: value,
@@ -49,7 +68,6 @@ const AppProvider = ({ children }) => {
   };
   const submitForm = async (e) => {
     e.preventDefault();
-    // console.log(`context submitForm todo.todo ${todo.todo}`);
     if (todo.todo) {
       const todoFromInput = JSON.stringify({
         todo: todo.todo,
@@ -64,7 +82,7 @@ const AppProvider = ({ children }) => {
       //   console.log(res.data);
     }
     const res = await axios.get("/todos");
-    console.log(res);
+    // console.log(res);
     setTodos(res.data.todos);
   };
   //=========================
@@ -74,20 +92,38 @@ const AppProvider = ({ children }) => {
     const tasks = await res.data.todos;
     // console.log(tasks); //ok [todos]
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
+    // console.log(tasks);
     setTodos(tasks);
   };
+  const displayTodos = async () => {
+    const res = await axios.get("/todos");
+    const tasks = await res.data.todos;
+    // console.log(tasks.reverse()); //ok reversed [todos]
+
+    // tasks.sort((a, b) => b._id - a._id);
+    // tasks.sort((a, b) => a._id - b._id);
+    setTodos(tasks);
+  };
+  useEffect(() => {
+    getTodos();
+  }, [todo, setTodo]);
+
+  useEffect(() => {
+    displayTodos();
+  }, [todo]);
   //--------------
+
   const toggleComplete = async (todo) => {
-    // console.log(todo);
     let newTodo = { ...todo };
-    // console.log(newTodo);
     newTodo.isCompleted = !todo.isCompleted;
-    // console.log(newTodo);
     const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
-    // console.log(res);
+    // console.log("toggle complete res.data");
+    // console.log(res.data); //???
+    // setTodo(res.data);
     setTodo(newTodo);
     //clear input
     setTodo({ todo: "" });
+    // getTodos();
   };
   //---------------
   //Sortable:
@@ -100,19 +136,23 @@ const AppProvider = ({ children }) => {
     const tasksIds = tasksCopy.map((t) => t._id);
     // console.log(tasksIds);
     const res = await axios.put(`/todos`, tasksIds);
-    console.log(`onSortEnd 'res': ${res}`); // Obj,obj
+    console.log(`onSortEnd 'res'`); // Obj,obj
+    console.log(res); //
+    // let newTodos = res.data.todos;
+    let newTodos = res.data;
+    // console.log(newTodos);
+    setTodos(newTodos);
     getTodos();
   };
   //-----------------
   //Delete One Todo:
   const handleDelete = async (_id) => {
-    console.log("Handle delete");
-    console.log(_id);
+    // console.log(_id);
     const tasks = todos.filter((todo) => todo._id !== _id);
     setTodos(tasks);
     const res = await axios.delete(`/todos/${_id}`);
-    console.log(res);
-    console.log(todos);
+    // console.log(res);
+    // console.log(todos);
   };
   //Delete completed Todos:
   const clearCompleted = async () => {
@@ -137,12 +177,19 @@ const AppProvider = ({ children }) => {
     </button>
   ));
   //---------------
+  //THEME (3):
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
   };
+  //THEME (4):
+  //run every time 'mood' changes
   useEffect(() => {
-    getTodos();
-  }, [todo, setTodo]);
+    //access HTML document & 'class' and set mood
+    document.documentElement.className = mood;
+    //every time 'mood' changes value => set
+    //localStorage to this value.
+    localStorage.setItem("mood", mood);
+  }, [mood]);
 
   //====================
 
@@ -160,6 +207,7 @@ const AppProvider = ({ children }) => {
         filters,
         filtersNames,
         getTodos,
+        displayTodos,
         toggleComplete,
         handleDelete,
         clearCompleted,
