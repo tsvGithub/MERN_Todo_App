@@ -11,7 +11,7 @@ import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
 const SortableItem = SortableElement(({ todo }) => {
-  const { toggleComplete, handleDelete, mood, filters, filtersNames } = useGlobalContext();
+  const { toggleComplete, handleDelete, mood } = useGlobalContext();
   // console.log(`TodoList2 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
   return (
     <li className={`input-${mood}`} key={todo._id}>
@@ -24,6 +24,7 @@ const SortableItem = SortableElement(({ todo }) => {
           onChange={() => toggleComplete(todo)}
           //too many rerenders:
           // onChange={handleComplete(id)}
+          aria-label="checkbox"
         />
         <span className="checkmark"></span>
       </label>
@@ -35,7 +36,7 @@ const SortableItem = SortableElement(({ todo }) => {
         //
         onClick={() => handleDelete(todo._id)}
       >
-        <img src={cross} />
+        <img src={cross} alt="cross" />
       </button>
     </li>
   );
@@ -61,8 +62,8 @@ const SortableList = SortableContainer(({ items }) => {
     <ul className="list-group">
       {/* {itemsReversed.map((todo, index) => ( */}
       {/* {items.reverse().map((todo, index) => ( */}
-      {/* //   {items.map((todo, index) => ( */}
-      {items.filter(filters[filter]).map((todo, index) => (
+      {items.map((todo, index) => (
+        // {items.filter(filters[filter]).map((todo, index) => (
         <SortableItem
           key={`item-${index}`}
           index={index}

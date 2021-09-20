@@ -16,6 +16,7 @@ const Form = () => {
             required
             className={`input input-${mood}`}
             placeholder="Create a new todo..."
+            aria-label="todo"
           />
         </span>
       </form>

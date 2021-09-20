@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 //sortable + array move:
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import arrayMove from "array-move";
+// import { SortableContainer, SortableElement } from "react-sortable-hoc";
+// import arrayMove from "array-move";
 
 import Form from "./Form";
 import Todo from "./Todo";
@@ -115,7 +115,7 @@ const TodoList = () => {
           <Todo todo={todo} mood={mood} />
           <button data-title="Delete todo?" className="cross" onClick={() => handleDelete(todo._id)}>
             {/* <button onClick={() => handleDelete(id)}> */}
-            <img src={cross} />
+            <img src={cross} alt="delete" />
           </button>
         </li>
       );
@@ -153,7 +153,7 @@ const TodoList = () => {
         <nav>
           <h1>TODO</h1>
           <button className="switcher" onClick={switchMood}>
-            <img src={mood === "dark" ? sun : moon} />
+            <img src={mood === "dark" ? sun : moon} alt="mood" />
           </button>
         </nav>
         {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
