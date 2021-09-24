@@ -13,7 +13,7 @@
   "author": "tsv",
   "license": "ISC",
   "dependencies": {
-    "ansi-regex": "^5.0.0",
+    "ansi-regex": "^5.0.1",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
