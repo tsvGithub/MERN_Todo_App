@@ -146,6 +146,7 @@ const AppProvider = ({ children }) => {
     //   console.log(data);
     // setRerender(!rerender);
     getTodos();
+    //==============
 
     // window.location.reload(false);
   };
