@@ -2,7 +2,6 @@ import React from "react";
 //context
 import { useGlobalContext } from "../context";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
-
 import Form from "./Form";
 import Todo from "./Todo";
 
@@ -11,8 +10,8 @@ import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
 const SortableItem = SortableElement(({ todo }) => {
-  const { toggleComplete, handleDelete, mood } = useGlobalContext();
-  // console.log(`TodoList2 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
+  const { toggleComplete, handleDelete, mood, filters, filtersNames } = useGlobalContext();
+  console.log(`TodoList2 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
   return (
     <li className={`input-${mood}`} key={todo._id}>
       <label className="task" data-title="Todo completed?">
@@ -24,10 +23,11 @@ const SortableItem = SortableElement(({ todo }) => {
           onChange={() => toggleComplete(todo)}
           //too many rerenders:
           // onChange={handleComplete(id)}
-          aria-label="checkbox"
+          // aria-label="checkbox"
         />
         <span className="checkmark"></span>
       </label>
+      {/* <Todo todo={todo} mood={mood} /> */}
       <Todo todo={todo} mood={mood} />
 
       <button
@@ -43,7 +43,7 @@ const SortableItem = SortableElement(({ todo }) => {
 });
 
 const SortableList = SortableContainer(({ items }) => {
-  const { handleDelete, toggleComplete, filters, filter, filtersNames, todos } = useGlobalContext();
+  const { handleDelete, toggleComplete, filters, filtersNames, todos, filter } = useGlobalContext();
   // items.map((item, i) => {
   //   console.log(item, i);
   // });
@@ -89,6 +89,7 @@ const TodoList2 = () => {
     filters,
     filtersNames,
     getTodos,
+    getCompleted,
     toggleComplete,
     handleDelete,
     clearCompleted,

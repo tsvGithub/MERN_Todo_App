@@ -103,12 +103,13 @@ app.put("/todos/:id", async (req, res) => {
 //Update todos:
 app.put("/todos", async (req, res) => {
   const todosIds = req.body;
+  console.log(todosIds);
   for (const [i, id] of todosIds.entries()) {
     await Todo.updateOne({ _id: id }, { sorting: i });
-    // console.log(i, id);
+    console.log(i, id);
   }
   const todos = await Todo.find();
-  // console.log(todos);
+  console.log(todos);
   // res.json("The list was ordered!");
   res.json(todos);
 });

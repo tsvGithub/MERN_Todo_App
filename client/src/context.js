@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import Todo from "./components/Todo";
+//SORTABLE (1)
 
+// import { arrayMoveImmutable } from "array-move";
+import { arrayMove } from "react-sortable-hoc";
+// import { arrayMoveMutable } from "array-move";
 // import moon from "./assets/images/icon-moon.svg";
 // import sun from "./assets/images/icon-sun.svg";
-// import cross from "./../assets/images/icon-cross.svg";
 import cross from "./assets/images/icon-cross.svg";
 
 const AppContext = React.createContext();
+//================================================================
 
 //================================================================
 //FILTERS (1)
@@ -45,8 +49,8 @@ const getStorageTheme = () => {
 const AppProvider = ({ children }) => {
   //State:
   const [todo, setTodo] = useState({
-    todo: "",
-    isCompleted: false,
+    // todo: "",
+    // isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
   //FILTERS (2) 'All' filter applies for initial state
@@ -92,15 +96,30 @@ const AppProvider = ({ children }) => {
   };
   const getTodos = async () => {
     const res = await axios.get("/todos");
-    // console.log(res);
-    setTodos(res.data.todos);
+    // console.log(`getTodos context 'res': ${res}`); //ok all infos
+    const tasks = await res.data.todos;
+    // console.log(tasks); //ok [todos]
+    tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
+    // console.log(tasks);
+    setTodos(tasks);
   };
 
+  const displayTodos = async () => {
+    const res = await axios.get("/todos");
+    const tasks = await res.data.todos;
+    // console.log(tasks.reverse()); //ok reversed [todos]
+
+    // tasks.sort((a, b) => b._id - a._id);
+    // tasks.sort((a, b) => a._id - b._id);
+    setTodos(tasks);
+  };
   useEffect(() => {
     getTodos();
   }, [todo, setTodo]);
 
-  //--------------
+  useEffect(() => {
+    displayTodos();
+  }, [todo]);
 
   const toggleComplete = async (todo) => {
     let newTodo = { ...todo };
@@ -114,6 +133,31 @@ const AppProvider = ({ children }) => {
     setTodo({ todo: "" });
     // getTodos();
   };
+
+  //SORTABLE (3)
+  const onSortEnd = async ({ oldIndex, newIndex }) => {
+    console.log(oldIndex, newIndex);
+    console.log(todos);
+    let tasksCopy = [...todos];
+    // tasksCopy = arrayMoveImmutable(tasksCopy, oldIndex, newIndex);
+    // tasksCopy = arrayMoveMutable(tasksCopy, oldIndex, newIndex);
+    tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
+    setTodos(tasksCopy);
+    console.log(tasksCopy);
+
+    const tasksIds = tasksCopy.map((t) => t._id);
+    console.log(tasksIds);
+    const res = await axios.put(`/todos`, tasksIds);
+    console.log(`onSortEnd 'res':`);
+    console.log(res);
+    // let newTodos = res.data.todos;
+    let newTodos = await res.data;
+    console.log(newTodos);
+    setTodos(newTodos);
+    getTodos();
+  };
+  //--------------
+
   //-----------------
   //Delete One Todo:
   const handleDelete = async (_id) => {
@@ -122,7 +166,7 @@ const AppProvider = ({ children }) => {
     setTodos(tasks);
     const res = await axios.delete(`/todos/${_id}`);
     console.log(res);
-    // console.log(todos);
+    console.log(todos);
   };
 
   //Delete completed Todos:
@@ -164,13 +208,14 @@ const AppProvider = ({ children }) => {
   }, [mood]);
 
   //--------------------
-  //All Todos:
+  // //All Todos:
   let todosReversed = [...todos].reverse(); //last item goes first
   const allTodos =
     todosReversed.length > 0 &&
     //FILTERS (4) set filters .filter(filters[filter]) for each item
     todosReversed.filter(filters[filter]).map((todo, id) => {
-      // todosReversed.map((todo, id) => {
+      // todosReversed.map((todo, id, index) => {
+      // console.log(todo, id);
       return (
         <li className={`input-${mood}`} key={id}>
           <label className="task" data-title="Todo completed?">
@@ -211,11 +256,12 @@ const AppProvider = ({ children }) => {
         filters,
         filtersNames,
         getTodos,
-        // displayTodos,
+        displayTodos,
         toggleComplete,
         handleDelete,
         clearCompleted,
         itemsLeft,
+        onSortEnd,
         filterList,
         switchMood,
         changeForm,

@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
+// import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { arrayMoveImmutable } from "array-move";
+// import arrayMove from "array-move";
+
 import Todo from "./Todo";
 
 import axios from "axios";
-// import arrayMove from "array-move";
+
+//================================================================
+//FILTERS (1)
+//(1a)'filters' has keys with filters 'names' (All, Active, Completed),
+//and values are functions to filter 'todos' data
+//array (all/not completed/completed)
+const filters = {
+  All: () => true,
+  Active: (todo) => !todo.isCompleted,
+  Completed: (todo) => todo.isCompleted,
+};
+//(1b)collect an array of filters 'names' ([All, Active, Completed])
+const filtersNames = Object.keys(filters);
+// console.log(filtersNames);
+
 const SortableItem = SortableElement(({ value }) => {
   return (
     <li className="list-group-item">
@@ -11,7 +29,6 @@ const SortableItem = SortableElement(({ value }) => {
         {value.sorting}. {value.todo}
         {/* {value.sorting}. {value.title} */}
       </h1>
-      <p>{value.isCompleted}</p>
       {/* <p>{value.description}</p> */}
       <p>{value._id}</p>
     </li>
@@ -19,12 +36,51 @@ const SortableItem = SortableElement(({ value }) => {
 });
 
 const SortableList = SortableContainer(({ items }) => {
+  //FILTERS (2) 'All' filter applies for initial state
+  const [filter, setFilter] = useState("All");
+  // console.log(filter);
+  //----------------
+  //-------------
+  //FILTERS (6)
+  const itemsLeft = items.filter(filters["Active"]).length;
+
+  //FILTER (3)
+  const filterList = filtersNames.map((name) => (
+    //filters
+    <button
+      key={name}
+      className={filter === name ? "current filter-btn" : "filter-btn"}
+      onClick={() => setFilter(name)}
+      aria-pressed={name === filter}
+    >
+      {name}
+    </button>
+  ));
+
   return (
-    <ul className="list-group">
-      {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} />
-      ))}
-    </ul>
+    <div>
+      {/*========================FILTER============================= */}
+
+      <ul>
+        <li key="items-left">{itemsLeft} items left</li>
+        {/*Filters (5) */}
+        <li key="filter-list" className="filter-list">
+          {filterList}
+        </li>
+        <li key="filter-completed">
+          <button className="filter-btn">Clear completed</button>
+        </li>
+      </ul>
+
+      <ul className="list-group">
+        {/* //FILTERS (4) set filters .filter(filters[filter]) for each item*/}
+        {items.filter(filters[filter]).map((value, index) => (
+          // {items.map((value, index) => (
+          // {items.reverse().map((value, index) => (
+          <SortableItem key={`item-${index}`} index={index} value={value} />
+        ))}
+      </ul>
+    </div>
   );
 });
 
@@ -43,6 +99,26 @@ const SortableComponent = () => {
   });
   const [todos, setTodos] = useState([]);
   // console.log(todos); //- //ok
+  // //FILTERS (2) 'All' filter applies for initial state
+  // const [filter, setFilter] = useState("All");
+  // //----------------
+  // //-------------
+  // //FILTERS (6)
+  // const itemsLeft = todos.filter(filters["Active"]).length;
+
+  // //FILTER (3)
+  // const filterList = filtersNames.map((name) => (
+  //   //filters
+  //   <button
+  //     key={name}
+  //     className={filter === name ? "current filter-btn" : "filter-btn"}
+  //     onClick={() => setFilter(name)}
+  //     aria-pressed={name === filter}
+  //   >
+  //     {name}
+  //   </button>
+  // ));
+  //---------------
 
   const getData = async () => {
     // const res = await fetch("/todos");
@@ -55,8 +131,11 @@ const SortableComponent = () => {
     const res = await axios.get("/todos");
     // console.log(res); //ok all infos
     const tasks = await res.data.todos;
-    // console.log(tasks); //ok [todos]
+    // console.log(`tasks`, tasks);
+    // let tasksReversed = await tasks.reverse(); //ne rabotaet!
+    // console.log(`tasks reversed`, tasksReversed);
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
+    // await tasksReversed.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
     setTodos(tasks);
   };
 
@@ -67,9 +146,12 @@ const SortableComponent = () => {
   const onSortEnd = async ({ oldIndex, newIndex }) => {
     // console.log(todos);
     let tasksCopy = [...todos];
-    tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
+    // tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
+    // tasksCopy.reverse(); //lomaetsja
+    tasksCopy = arrayMoveImmutable(tasksCopy, oldIndex, newIndex);
+
     setTodos(tasksCopy);
-    // console.log(tasksCopy);
+    console.log(`tasksCopy`, tasksCopy);
     const tasksIds = tasksCopy.map((t) => t._id);
     // console.log(tasksIds);
     const res = await axios.put(`/todos`, tasksIds);
@@ -83,6 +165,7 @@ const SortableComponent = () => {
     //   });
     //   const data = await res.json();
     //   console.log(data);
+    getData();
   };
 
   const allTasks = todos.map((todo, id) => {
@@ -126,16 +209,9 @@ const SortableComponent = () => {
     </div>
   );
 };
+
 function Main() {
-  return (
-    <div>
-      <div>
-        <div>
-          <SortableComponent />
-        </div>
-      </div>
-    </div>
-  );
+  return <SortableComponent />;
 }
 
 export default Main;

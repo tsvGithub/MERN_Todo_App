@@ -2,9 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // import TodoList from "./components/TodoList";
-// import TodoList2 from "./components/TodoList2";
+import TodoList2 from "./components/TodoList2";
 import TodoList3 from "./components/TodoList3";
-import { AppProvider } from "./context";
+import Main from "./components/Main";
+import { AppProvider } from "./context3";
+// import { AppProvider } from "./context";
 import "./App.css";
 
 //I-> II. context.js
@@ -18,6 +20,7 @@ function App() {
             {/* <TodoList2 /> */}
             <TodoList3 />
             {/* <TodoList /> */}
+            <Main />
           </Route>
         </Switch>
       </Router>
