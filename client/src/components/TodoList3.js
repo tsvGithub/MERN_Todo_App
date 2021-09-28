@@ -22,7 +22,6 @@ const filters = {
 };
 //(1b)collect an array of filters 'names' ([All, Active, Completed])
 const filtersNames = Object.keys(filters);
-// console.log(filtersNames); //All, Active, Completed
 
 const SortableItem = SortableElement(({ todo }) => {
   const { toggleComplete, handleDelete, mood } = useGlobalContext();
@@ -35,19 +34,20 @@ const SortableItem = SortableElement(({ todo }) => {
           //state
           name="isCompleted"
           checked={todo.isCompleted}
+          //------------------
+          //Warning: You provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.
+          // onClick={() => toggleComplete}
+          //----------------------
           onChange={() => toggleComplete(todo)}
+          //--------------
           //too many rerenders:
           // onChange={handleComplete(id)}
           aria-label="checkbox"
         />
         <span className="checkmark"></span>
       </label>
-      {/* <Todo todo={todo} mood={mood} /> */}
-      <div key={todo._id} className={todo.isCompleted ? `line-through line-through-${mood}` : ""}>
-        <span>{todo.todo}</span>
-        <span> {todo.sorting}</span>
-        {/* <span> {todo._id}</span> */}
-      </div>
+
+      <Todo todo={todo} mood={mood} />
 
       <button
         data-title="Delete todo?"
@@ -62,23 +62,11 @@ const SortableItem = SortableElement(({ todo }) => {
 });
 
 const SortableList = SortableContainer(({ items }) => {
-  const {
-    //  filter, setFilter,
-    handleDelete,
-    toggleComplete,
-    mood,
-    clearCompleted,
-    todos,
-  } = useGlobalContext();
-  // console.log(filter);
-  //
+  const { mood, clearCompleted } = useGlobalContext();
   //FILTERS (2) 'All' filter applies for initial state
   const [filter, setFilter] = useState("All");
-  // console.log(filter);
-
   //FILTERS (6)
   const itemsLeft = items.filter(filters["Active"]).length;
-  // console.log(itemsLeft); //0
   //FILTER (3)
   const filterList = filtersNames.map((name) => (
     //filters
@@ -113,13 +101,7 @@ const SortableList = SortableContainer(({ items }) => {
         {/* {items.reverse().map((todo, index) => ( */}
         {/* {items.map((todo, index) => ( */}
         {items.filter(filters[filter]).map((todo, index) => (
-          <SortableItem
-            key={`item-${index}`}
-            index={index}
-            todo={todo}
-            onClick={handleDelete}
-            onChange={toggleComplete}
-          />
+          <SortableItem key={`item-${index}`} index={index} todo={todo} />
         ))}
       </ul>
     </div>
@@ -128,24 +110,24 @@ const SortableList = SortableContainer(({ items }) => {
 
 const TodoList3 = () => {
   const {
-    todo,
-    setTodo,
+    // todo,
+    // setTodo,
     todos,
     setTodos,
     mood,
-    allTodos,
-    setMood,
-    filter,
-    setFilter,
-    filters,
-    filtersNames,
-    getTodos,
+    // allTodos,
+    // setMood,
+    // filter,
+    // setFilter,
+    // filters,
+    // filtersNames,
+    // getTodos,
     toggleComplete,
     handleDelete,
     onSortEnd,
-    clearCompleted,
-    itemsLeft,
-    filterList,
+    // clearCompleted,
+    // itemsLeft,
+    // filterList,
     switchMood,
   } = useGlobalContext();
   return (
@@ -161,31 +143,15 @@ const TodoList3 = () => {
         {/*========================FORM=============================== */}
         {/*NB!send todos+setTodos to Form for 'todos' instant update*/}
         <Form todos={todos} mood={mood} setTodos={setTodos} />
-        {/*========================FILTER============================= */}
-        {/* <ul className={`filter filter-${mood} input-${mood}`}>
-          <li key="items-left">{itemsLeft} items left</li> */}
-        {/*Filters (5) */}
-        {/* <li key="filter-list" className="filter-list">
-            {filterList}
-          </li>
-          <li key="filter-completed">
-            <button className="filter-btn" onClick={clearCompleted}>
-              Clear completed
-            </button>
-          </li>
-        </ul> */}
-
         {/*========================TODOS========================= */}
-        {/* <ul className="list">{allTodos}</ul> */}
         <section className="list">
           <SortableList
-            //
             // pressDelay={250}
             items={todos}
             onSortEnd={onSortEnd}
             onClick={handleDelete}
             onChange={toggleComplete}
-            // distance={1}
+            distance={1}
             // lockAxis="y"
           />
         </section>

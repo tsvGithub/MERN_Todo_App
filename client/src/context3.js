@@ -1,28 +1,11 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
-import Todo from "./components/Todo";
 // //SORTABLE (1)
 import { arrayMoveImmutable } from "array-move";
 // import { arrayMove } from "react-sortable-hoc";
 //----------------------
-import cross from "./assets/images/icon-cross.svg";
 
 const AppContext = React.createContext();
-
-//23/09
-// //================================================================
-// //FILTERS (1)
-// //(1a)'filters' has keys with filters 'names' (All, Active, Completed),
-// //and values are functions to filter 'todos' data
-// //array (all/not completed/completed)
-// const filters = {
-//   All: () => true,
-//   Active: (todo) => !todo.isCompleted,
-//   Completed: (todo) => todo.isCompleted,
-// };
-// //(1b)collect an array of filters 'names' ([All, Active, Completed])
-// const filtersNames = Object.keys(filters);
-// // console.log(filtersNames);
 
 //=============================
 //THEME (1)
@@ -40,35 +23,23 @@ const getStorageTheme = () => {
 };
 
 //==============================================
-
 //II. (I.App.js + III. TodoList.js)
 //all logic is here
 const AppProvider = ({ children }) => {
   //State:
   const [todo, setTodo] = useState({
-    // todo: "",
-    // isCompleted: false,
+    todo: "",
+    isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
-
-  //?????
-  const [rerender, setRerender] = useState(false);
-
-  //FILTERS (2) 'All' filter applies for initial state
-  //23/09
-  // const [filter, setFilter] = useState("All");
-  //THEME (2):
-  // const [mood, setMood] = useState("dark");
-  //theme state with user preferences
   const [mood, setMood] = useState(getStorageTheme());
-
-  //-------------------------
 
   //=======================
   //Form:
   const changeForm = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    // console.log(name, value);
     setTodo({
       ...todo,
       [name]: value,
@@ -98,7 +69,7 @@ const AppProvider = ({ children }) => {
     const res = await axios.get("/todos");
     // console.log(`getTodos context 'res':`, res); //ok all infos
     const tasks = await res.data.todos;
-    console.log(`tasks`, tasks);
+    // console.log(`tasks`, tasks);
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
     // console.log(tasks);
     setTodos(tasks);
@@ -150,18 +121,17 @@ const AppProvider = ({ children }) => {
 
     // window.location.reload(false);
   };
+
   const toggleComplete = async (todo) => {
     let newTodo = { ...todo };
     newTodo.isCompleted = !todo.isCompleted;
     const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
-    // console.log("toggle complete res.data");
     // console.log(res.data); //
     // setTodo(res.data);
     setTodo(newTodo);
     //clear input
     setTodo({ todo: "" });
     getTodos();
-    // setRerender(!rerender);
   };
   //========================================
   // //SORTABLE (3)
@@ -191,12 +161,12 @@ const AppProvider = ({ children }) => {
   //-----------------
   //Delete One Todo:
   const handleDelete = async (_id) => {
-    console.log(_id);
+    // console.log(_id);
     const tasks = todos.filter((todo) => todo._id !== _id);
     setTodos(tasks);
     const res = await axios.delete(`/todos/${_id}`);
-    console.log(res);
-    console.log(todos);
+    // console.log(res);
+    // console.log(todos);
   };
 
   //Delete completed Todos:
