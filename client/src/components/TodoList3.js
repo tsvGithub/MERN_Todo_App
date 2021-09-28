@@ -27,7 +27,12 @@ const SortableItem = SortableElement(({ todo }) => {
   const { toggleComplete, handleDelete, mood } = useGlobalContext();
   // console.log(`TodoList3 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
   return (
-    <li className={`input-${mood}`} key={todo._id}>
+    <li
+      className={`input-${mood}`}
+      // key={todo._id}
+      //28/09
+      key={`item-${todo.todo}`}
+    >
       <label className="task" data-title="Todo completed?">
         <input
           type="checkbox"
@@ -47,7 +52,7 @@ const SortableItem = SortableElement(({ todo }) => {
         <span className="checkmark"></span>
       </label>
 
-      <Todo todo={todo} mood={mood} />
+      <Todo todo={todo} mood={mood} key={todo.todo} />
 
       <button
         data-title="Delete todo?"
@@ -101,7 +106,10 @@ const SortableList = SortableContainer(({ items }) => {
         {/* {items.reverse().map((todo, index) => ( */}
         {/* {items.map((todo, index) => ( */}
         {items.filter(filters[filter]).map((todo, index) => (
-          <SortableItem key={`item-${index}`} index={index} todo={todo} />
+          <div key={todo._id}>
+            <SortableItem key={`item-${todo}`} index={index} todo={todo} />
+            {/* <SortableItem key={`item-${index}`} index={index} todo={todo} /> */}
+          </div>
         ))}
       </ul>
     </div>
@@ -149,8 +157,8 @@ const TodoList3 = () => {
             // pressDelay={250}
             items={todos}
             onSortEnd={onSortEnd}
-            onClick={handleDelete}
-            onChange={toggleComplete}
+            // onClick={handleDelete}
+            // onChange={toggleComplete}
             distance={1}
             // lockAxis="y"
           />
