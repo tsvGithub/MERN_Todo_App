@@ -1,6 +1,5 @@
 import React from "react";
 import { useGlobalContext } from "../context3";
-// import { useGlobalContext } from "../context";
 
 const Form = () => {
   const { todo, mood, changeForm, submitForm } = useGlobalContext();

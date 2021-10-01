@@ -5,8 +5,7 @@ const Todo = ({ todo, mood }) => {
   return (
     <div key={todo.todo} className={todo.isCompleted ? `line-through line-through-${mood}` : ""}>
       <span>{todo.todo}</span>
-      <span> {todo.sorting}</span>
-      {/* <span> {todo._id}</span> */}
+      {/* <span> {todo.sorting}</span> */}
     </div>
   );
 };

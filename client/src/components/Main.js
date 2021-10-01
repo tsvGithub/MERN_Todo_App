@@ -4,8 +4,6 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
 // import arrayMove from "array-move";
 
-import Todo from "./Todo";
-
 import axios from "axios";
 
 //================================================================
@@ -39,11 +37,8 @@ const SortableList = SortableContainer(({ items }) => {
   //FILTERS (2) 'All' filter applies for initial state
   const [filter, setFilter] = useState("All");
   // console.log(filter);
-  //----------------
-  //-------------
   //FILTERS (6)
   const itemsLeft = items.filter(filters["Active"]).length;
-
   //FILTER (3)
   const filterList = filtersNames.map((name) => (
     //filters
@@ -56,11 +51,9 @@ const SortableList = SortableContainer(({ items }) => {
       {name}
     </button>
   ));
-
   return (
     <div>
       {/*========================FILTER============================= */}
-
       <ul>
         <li key="items-left">{itemsLeft} items left</li>
         {/*Filters (5) */}
@@ -76,7 +69,7 @@ const SortableList = SortableContainer(({ items }) => {
         {/* //FILTERS (4) set filters .filter(filters[filter]) for each item*/}
         {items.filter(filters[filter]).map((value, index) => (
           // {items.map((value, index) => (
-          // {items.reverse().map((value, index) => (
+          // {items.reverse().map((value, index) => ( //NB!!! reverse() with Sortable doesn't work!!!
           <SortableItem key={`item-${index}`} index={index} value={value} />
         ))}
       </ul>
@@ -85,6 +78,7 @@ const SortableList = SortableContainer(({ items }) => {
 });
 
 const SortableComponent = () => {
+  //for local test use this State [tasks] =>
   //   const [tasks, setTasks] = useState([
   //     { title: "item 1", description: "task one" },
   //     { title: "item 2", description: "task two" },
@@ -92,42 +86,15 @@ const SortableComponent = () => {
   //     { title: "item 4", description: "task four" },
   //     { title: "item 5", description: "task five" },
   //   ]);
-  //State:
+  //or this State for todo DB:
   const [todo, setTodo] = useState({
     todo: "",
     isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
   // console.log(todos); //- //ok
-  // //FILTERS (2) 'All' filter applies for initial state
-  // const [filter, setFilter] = useState("All");
-  // //----------------
-  // //-------------
-  // //FILTERS (6)
-  // const itemsLeft = todos.filter(filters["Active"]).length;
-
-  // //FILTER (3)
-  // const filterList = filtersNames.map((name) => (
-  //   //filters
-  //   <button
-  //     key={name}
-  //     className={filter === name ? "current filter-btn" : "filter-btn"}
-  //     onClick={() => setFilter(name)}
-  //     aria-pressed={name === filter}
-  //   >
-  //     {name}
-  //   </button>
-  // ));
-  //---------------
-
+  //======================
   const getData = async () => {
-    // const res = await fetch("/todos");
-    // console.log(res);
-    // const tasks = await res.json();
-    // console.log(tasks);
-    // tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
-    // setTodos(tasks);
-    //------
     const res = await axios.get("/todos");
     // console.log(res); //ok all infos
     const tasks = await res.data.todos;
@@ -135,10 +102,8 @@ const SortableComponent = () => {
     // let tasksReversed = await tasks.reverse(); //ne rabotaet!
     // console.log(`tasks reversed`, tasksReversed);
     tasks.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
-    // await tasksReversed.sort((a, b) => (a.sorting > b.sorting ? 1 : b.sorting > a.sorting ? -1 : 0));
     setTodos(tasks);
   };
-
   useEffect(() => {
     getData();
   }, []);
@@ -155,16 +120,7 @@ const SortableComponent = () => {
     const tasksIds = tasksCopy.map((t) => t._id);
     // console.log(tasksIds);
     const res = await axios.put(`/todos`, tasksIds);
-    // console.log(res);
-    //   const res = await fetch("/todos", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(tasksIds),
-    //   });
-    //   const data = await res.json();
-    //   console.log(data);
+    console.log(res);
     getData();
   };
 

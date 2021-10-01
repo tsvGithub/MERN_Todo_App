@@ -94,7 +94,8 @@ a {
   color: var(--DT-Light-Grayish-Blue);
 }
 .wrapper-light {
-  background-color: var(--DT-Light-Grayish-Blue);
+  /* background-color: var(--DT-Light-Grayish-Blue); */
+  background-color: var(--LT-Very-Light-Gray);
   background-image: url(./assets/images/bg-desktop-light.jpg);
   color: var(--DT-Very-Dark-Desaturated-Blue);
 }
@@ -317,7 +318,13 @@ button.cross:hover {
 ul.filter {
   display: flex;
   justify-content: space-around;
-  /* background: var(--DT-Very-Dark-Desaturated-Blue); */
+  /*background: var(--DT-Very-Dark-Desaturated-Blue);
+  */
+  border-bottom-color: var(--DT-Very-Dark-Grayish-Blue);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-radius: var(--radius);
+  box-shadow: var(--dark-shadow);
 }
 ul.filter > li {
   flex: 2;
@@ -375,6 +382,17 @@ button.filter-btn:hover {
   color: var(--DT-Light-Grayish-Blue-hover);
 }
 
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+}
+.footer-dark {
+  color: var(--DT-Dark-Grayish-Blue);
+}
+.footer-light {
+  color: var(--DT-Very-Dark-Desaturated-);
+}
+/*---Medium size and less 48em (768px)------ */
 @media screen and (max-width: 48em) {
   ul.filter {
     flex-flow: row wrap;

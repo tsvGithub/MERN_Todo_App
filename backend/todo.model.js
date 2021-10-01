@@ -17,18 +17,6 @@ const Todo = new Schema({
     type: Number,
     default: 0,
   },
-  // description: {
-  //   type: String,
-  // },
-  // responsible: {
-  //   type: String,
-  // },
-  // priority: {
-  //   type: String,
-  // },
-  // completed: {
-  //   type: Boolean,
-  // },
 });
 //model name "Todo" from let Todo
 module.exports = mongoose.model("Todo", Todo);

@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 // //SORTABLE (1)
 import { arrayMoveImmutable } from "array-move";
 // import { arrayMove } from "react-sortable-hoc";
 //----------------------
-
 const AppContext = React.createContext();
 
 //=============================
@@ -21,10 +20,21 @@ const getStorageTheme = () => {
   //return default value or value of the key from localStorage.
   return mood;
 };
+//================================================================
+//FILTERS (1)
+//(1a)'filters' has keys with filters 'names' (All, Active, Completed),
+//and values are functions to filter 'todos' data
+//array (all/not completed/completed)
+const filters = {
+  All: () => true,
+  Active: (todo) => !todo.isCompleted,
+  Completed: (todo) => todo.isCompleted,
+};
+//(1b)collect an array of filters 'names' ([All, Active, Completed])
+const filtersNames = Object.keys(filters);
 
 //==============================================
 //II. (I.App.js + III. TodoList.js)
-//all logic is here
 const AppProvider = ({ children }) => {
   //State:
   const [todo, setTodo] = useState({
@@ -32,6 +42,9 @@ const AppProvider = ({ children }) => {
     isCompleted: false,
   });
   const [todos, setTodos] = useState([]);
+  //FILTERS (2) 'All' filter applies for initial state
+  const [filter, setFilter] = useState("All");
+  //THEME
   const [mood, setMood] = useState(getStorageTheme());
 
   //=======================
@@ -65,6 +78,7 @@ const AppProvider = ({ children }) => {
     // console.log(res);
     setTodos(res.data.todos);
   };
+  //===================
   const getTodos = async () => {
     const res = await axios.get("/todos");
     // console.log(`getTodos context 'res':`, res); //ok all infos
@@ -74,58 +88,48 @@ const AppProvider = ({ children }) => {
     // console.log(tasks);
     setTodos(tasks);
   };
-
-  // const displayTodos = async () => {
-  //   const res = await axios.get("/todos");
-  //   const tasks = await res.data.todos;
-  //   // console.log(tasks.reverse()); //ok reversed [todos]
-
-  //   // tasks.sort((a, b) => b._id - a._id);
-  //   // tasks.sort((a, b) => a._id - b._id);
-  //   setTodos(tasks);
-  // };
   useEffect(() => {
     getTodos();
   }, [todo, setTodo]);
 
-  // useEffect(() => {
-  //   displayTodos();
-  // }, [todo]);
-
   //=========================
+  //SORTABLE (3)
   const onSortEnd = async ({ oldIndex, newIndex }) => {
-    // console.log(todos);
-    let tasksCopy = [...todos];
+    // console.log(`onSortEnd filter: `, filter); //OK: Active Completed All
+    // console.log(`onSortEnd todos: `, todos);
+    // console.log(`onSortEnd oldIndex, newIndex: `, oldIndex, newIndex);
+    //----------
+    //create copy of 'todos' Array:
+    // let tasksCopy = [...todos];
+    //------------
+    //Or conditionally chose between All/Active/Completed
+    //This because I wanted different sorting index for All/Active&Completed to be able sort in different Filter
+    let completedItems = todos.filter((todo) => todo.isCompleted === true);
+    // console.log(completedItems);
+    let notCompletedItems = todos.filter((todo) => todo.isCompleted === false);
+    // console.log(notCompletedItems);
+    let tasksCopy = filter === "All" ? todos : filter === "Active" ? notCompletedItems : completedItems;
+    console.log(tasksCopy);
+    //----------
     // tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
     // tasksCopy.reverse(); //lomaetsja
     tasksCopy = arrayMoveImmutable(tasksCopy, oldIndex, newIndex);
 
     setTodos(tasksCopy);
-    console.log(`tasksCopy`, tasksCopy);
+    // console.log(`onSortEnd tasksCopy, oldIndex, newIndex:`, tasksCopy, oldIndex, newIndex);
     const tasksIds = tasksCopy.map((t) => t._id);
-    // console.log(tasksIds);
-    const res = await axios.put(`/todos`, tasksIds);
-    // console.log(res);
-    //   const res = await fetch("/todos", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(tasksIds),
-    //   });
-    //   const data = await res.json();
-    //   console.log(data);
-    // setRerender(!rerender);
+    // console.log(`onSortEnd tasksIds: `, tasksIds);
+    await axios.put(`/todos`, tasksIds);
+    // const res = await axios.put(`/todos`, tasksIds);
+    // console.log(`onSortEnd res: `, res);
     getTodos();
-    //==============
-
-    // window.location.reload(false);
   };
-
+  //=======================
   const toggleComplete = async (todo) => {
     let newTodo = { ...todo };
     newTodo.isCompleted = !todo.isCompleted;
-    const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
+    await axios.put(`/todos/${newTodo._id}`, newTodo);
+    // const res = await axios.put(`/todos/${newTodo._id}`, newTodo);
     // console.log(res.data); //
     // setTodo(res.data);
     setTodo(newTodo);
@@ -133,66 +137,37 @@ const AppProvider = ({ children }) => {
     setTodo({ todo: "" });
     getTodos();
   };
-  //========================================
-  // //SORTABLE (3)
-  // const onSortEnd = async ({ oldIndex, newIndex }) => {
-  //   console.log(oldIndex, newIndex);
-  //   console.log(todos);
-  //   let tasksCopy = [...todos];
-  //   // tasksCopy = arrayMoveImmutable(tasksCopy, oldIndex, newIndex);
-  //   // tasksCopy = arrayMoveMutable(tasksCopy, oldIndex, newIndex);
-  //   tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
-  //   setTodos(tasksCopy);
-  //   console.log(tasksCopy);
 
-  //   const tasksIds = tasksCopy.map((t) => t._id);
-  //   console.log(tasksIds);
-  //   const res = await axios.put(`/todos`, tasksIds);
-  //   console.log(`onSortEnd 'res':`);
-  //   console.log(res);
-  //   // let newTodos = res.data.todos;
-  //   let newTodos = await res.data;
-  //   console.log(newTodos);
-  //   setTodos(newTodos);
-  //   getTodos();
-  // };
-  //--------------
-
+  const toggleFilter = (name) => {
+    setFilter(name);
+    // console.log(`Toggle Filter 'name':`, name);
+    //--------------
+    let completedItems = todos.filter((todo) => todo.isCompleted === true);
+    // console.log(completedItems);
+    let notCompletedItems = todos.filter((todo) => todo.isCompleted === false);
+    // console.log(notCompletedItems);
+    setTodos(name === "All" ? todos : name === "Active" ? notCompletedItems : completedItems);
+    getTodos();
+  };
   //-----------------
   //Delete One Todo:
   const handleDelete = async (_id) => {
     // console.log(_id);
     const tasks = todos.filter((todo) => todo._id !== _id);
     setTodos(tasks);
-    const res = await axios.delete(`/todos/${_id}`);
+    await axios.delete(`/todos/${_id}`);
+    // const res = await axios.delete(`/todos/${_id}`);
     // console.log(res);
     // console.log(todos);
   };
-
   //Delete completed Todos:
   const clearCompleted = async () => {
     const activeTodos = todos.filter((todo) => !todo.isCompleted);
-    console.log(activeTodos);
+    // console.log(activeTodos);
     setTodos(activeTodos);
     await axios.delete("/todos");
   };
-  // //-------------
-  // //FILTERS (6)
-  // const itemsLeft = todos.filter(filters["Active"]).length;
-  // //----------------
-  // //FILTER (3)
-  // const filterList = filtersNames.map((name) => (
-  //   //filters
-  //   <button
-  //     key={name}
-  //     className={filter === name ? "current filter-btn" : "filter-btn"}
-  //     onClick={() => setFilter(name)}
-  //     aria-pressed={name === filter}
-  //   >
-  //     {name}
-  //   </button>
-  // ));
-  // //---------------
+  //---------------
   //THEME (3):
   const switchMood = () => {
     setMood(mood === "dark" ? "light" : "dark");
@@ -206,40 +181,6 @@ const AppProvider = ({ children }) => {
     //localStorage to this value.
     localStorage.setItem("mood", mood);
   }, [mood]);
-
-  //--------------------
-  // // //All Todos:
-  // let todosReversed = [...todos].reverse(); //last item goes first
-  // const allTodos =
-  //   todosReversed.length > 0 &&
-  //   //FILTERS (4) set filters .filter(filters[filter]) for each item
-  //   todosReversed.filter(filters[filter]).map((todo, id) => {
-  //     // todosReversed.map((todo, id, index) => {
-  //     // console.log(todo, id);
-  //     return (
-  //       <li className={`input-${mood}`} key={id}>
-  //         <label className="task" data-title="Todo completed?">
-  //           <input
-  //             type="checkbox"
-  //             //state
-  //             name="isCompleted"
-  //             checked={todo.isCompleted}
-  //             onChange={() => toggleComplete(todo)}
-  //             //too many rerenders:
-  //             // onChange={handleComplete(id)}
-  //           />
-  //           <span className="checkmark"></span>
-  //         </label>
-  //         <Todo todo={todo} mood={mood} />
-  //         <button data-title="Delete todo?" className="cross" onClick={() => handleDelete(todo._id)}>
-  //           {/* <button onClick={() => handleDelete(id)}> */}
-  //           <img src={cross} alt="delete" />
-  //         </button>
-  //       </li>
-  //     );
-  //   });
-  // //----------------
-
   //====================
 
   return (
@@ -251,12 +192,12 @@ const AppProvider = ({ children }) => {
         setTodos,
         mood,
         setMood,
-        // filter,
-        // setFilter,
-        // filters,
-        // filtersNames,
+        filter,
+        setFilter,
+        toggleFilter,
+        filters,
+        filtersNames,
         getTodos,
-        // displayTodos,
         toggleComplete,
         handleDelete,
         clearCompleted,

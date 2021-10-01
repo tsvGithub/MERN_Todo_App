@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 import { useGlobalContext } from "../context3";
@@ -10,29 +10,25 @@ import moon from "./../assets/images/icon-moon.svg";
 import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
-//================================================================
-//FILTERS (1)
-//(1a)'filters' has keys with filters 'names' (All, Active, Completed),
-//and values are functions to filter 'todos' data
-//array (all/not completed/completed)
-const filters = {
-  All: () => true,
-  Active: (todo) => !todo.isCompleted,
-  Completed: (todo) => todo.isCompleted,
-};
-//(1b)collect an array of filters 'names' ([All, Active, Completed])
-const filtersNames = Object.keys(filters);
+// //================================================================
+// //FILTERS (1)
+// //(1a)'filters' has keys with filters 'names' (All, Active, Completed),
+// //and values are functions to filter 'todos' data
+// //array (all/not completed/completed)
+// const filters = {
+//   All: () => true,
+//   Active: (todo) => !todo.isCompleted,
+//   Completed: (todo) => todo.isCompleted,
+// };
+// //(1b)collect an array of filters 'names' ([All, Active, Completed])
+// const filtersNames = Object.keys(filters);
 
 const SortableItem = SortableElement(({ todo }) => {
   const { toggleComplete, handleDelete, mood } = useGlobalContext();
+  // console.log(`todo: `, todo);
   // console.log(`TodoList3 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
   return (
-    <li
-      className={`input-${mood}`}
-      // key={todo._id}
-      //28/09
-      key={`item-${todo.todo}`}
-    >
+    <li className={`input-${mood}`} key={`item-${todo.todo}`}>
       <label className="task" data-title="Todo completed?">
         <input
           type="checkbox"
@@ -67,24 +63,26 @@ const SortableItem = SortableElement(({ todo }) => {
 });
 
 const SortableList = SortableContainer(({ items }) => {
-  const { mood, clearCompleted } = useGlobalContext();
-  //FILTERS (2) 'All' filter applies for initial state
-  const [filter, setFilter] = useState("All");
+  const { filter, filters, filtersNames, toggleFilter, mood, clearCompleted } = useGlobalContext();
   //FILTERS (6)
   const itemsLeft = items.filter(filters["Active"]).length;
   //FILTER (3)
-  const filterList = filtersNames.map((name) => (
-    //filters
-    <button
-      key={name}
-      className={filter === name ? "current filter-btn" : "filter-btn"}
-      // onClick={() => console.log(name)} //OK
-      onClick={() => setFilter(name)}
-      aria-pressed={name === filter}
-    >
-      {name}
-    </button>
-  ));
+  const filterList = filtersNames.map((name) => {
+    // console.log(name);
+    return (
+      //filters
+      <button
+        key={`item-${name}`}
+        className={filter === name ? "current filter-btn" : "filter-btn"}
+        // onClick={() => console.log(name)} //OK
+        // onClick={() => setFilter(name)}
+        onClick={() => toggleFilter(name)}
+        aria-pressed={name === filter}
+      >
+        {name}
+      </button>
+    );
+  });
   return (
     <div>
       {/*========================FILTER============================= */}
@@ -102,42 +100,27 @@ const SortableList = SortableContainer(({ items }) => {
       </ul>
 
       <ul className="list-group">
+        {/* reverse() with Sortable doesn't work!*/}
         {/* {itemsReversed.map((todo, index) => ( */}
         {/* {items.reverse().map((todo, index) => ( */}
         {/* {items.map((todo, index) => ( */}
-        {items.filter(filters[filter]).map((todo, index) => (
-          <div key={todo._id}>
-            <SortableItem key={`item-${todo}`} index={index} todo={todo} />
-            {/* <SortableItem key={`item-${index}`} index={index} todo={todo} /> */}
-          </div>
-        ))}
+        {items.filter(filters[filter]).map((todo, index) => {
+          // console.log(filter); //All, Active, Completed
+          return (
+            <div key={todo._id}>
+              <SortableItem key={`item-${todo}`} index={index} todo={todo} />
+              {/* with original key={`item-${index}`} Sortable didn't work: */}
+              {/* <SortableItem key={`item-${index}`} index={index} todo={todo} /> */}
+            </div>
+          );
+        })}
       </ul>
     </div>
   );
 });
 
 const TodoList3 = () => {
-  const {
-    // todo,
-    // setTodo,
-    todos,
-    setTodos,
-    mood,
-    // allTodos,
-    // setMood,
-    // filter,
-    // setFilter,
-    // filters,
-    // filtersNames,
-    // getTodos,
-    toggleComplete,
-    handleDelete,
-    onSortEnd,
-    // clearCompleted,
-    // itemsLeft,
-    // filterList,
-    switchMood,
-  } = useGlobalContext();
+  const { todos, setTodos, mood, onSortEnd, switchMood } = useGlobalContext();
   return (
     <main className={`wrapper wrapper-${mood}`}>
       <div className="container">
@@ -153,6 +136,7 @@ const TodoList3 = () => {
         <Form todos={todos} mood={mood} setTodos={setTodos} />
         {/*========================TODOS========================= */}
         <section className="list">
+          {/* map over todos */}
           <SortableList
             // pressDelay={250}
             items={todos}
@@ -163,8 +147,9 @@ const TodoList3 = () => {
             // lockAxis="y"
           />
         </section>
-
-        {/* <section className="list">{allTodos}</section> */}
+        <footer>
+          <p className={`footer footer-${mood}`}>Drag and drop to reorder list</p>
+        </footer>
       </div>
     </main>
   );
