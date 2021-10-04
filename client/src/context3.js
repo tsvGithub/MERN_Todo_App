@@ -4,6 +4,12 @@ import axios from "axios";
 import { arrayMoveImmutable } from "array-move";
 // import { arrayMove } from "react-sortable-hoc";
 //----------------------
+import useSound from "use-sound";
+// import completeSound from "../assets/audio/Good-idea-bell.mp3";
+// import deleteSound from "../assets/audio/Low-battery-notify.mp3";
+import completeSound from "./assets/audio/Good-idea-bell.mp3";
+import deleteSound from "./assets/audio/Low-battery-notify.mp3";
+
 const AppContext = React.createContext();
 
 //=============================
@@ -46,6 +52,8 @@ const AppProvider = ({ children }) => {
   const [filter, setFilter] = useState("All");
   //THEME
   const [mood, setMood] = useState(getStorageTheme());
+  const [playComplete] = useSound(completeSound);
+  const [playDelete] = useSound(deleteSound);
 
   //=======================
   //Form:
@@ -126,6 +134,7 @@ const AppProvider = ({ children }) => {
   };
   //=======================
   const toggleComplete = async (todo) => {
+    playComplete();
     let newTodo = { ...todo };
     newTodo.isCompleted = !todo.isCompleted;
     await axios.put(`/todos/${newTodo._id}`, newTodo);
@@ -153,6 +162,7 @@ const AppProvider = ({ children }) => {
   //Delete One Todo:
   const handleDelete = async (_id) => {
     // console.log(_id);
+    playDelete();
     const tasks = todos.filter((todo) => todo._id !== _id);
     setTodos(tasks);
     await axios.delete(`/todos/${_id}`);
@@ -162,6 +172,8 @@ const AppProvider = ({ children }) => {
   };
   //Delete completed Todos:
   const clearCompleted = async () => {
+    playDelete();
+
     const activeTodos = todos.filter((todo) => !todo.isCompleted);
     // console.log(activeTodos);
     setTodos(activeTodos);

@@ -1,8 +1,6 @@
 import React from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
-
 import { useGlobalContext } from "../context3";
-
 import Form from "./Form";
 import Todo from "./Todo";
 
@@ -10,23 +8,11 @@ import moon from "./../assets/images/icon-moon.svg";
 import sun from "./../assets/images/icon-sun.svg";
 import cross from "./../assets/images/icon-cross.svg";
 
-// //================================================================
-// //FILTERS (1)
-// //(1a)'filters' has keys with filters 'names' (All, Active, Completed),
-// //and values are functions to filter 'todos' data
-// //array (all/not completed/completed)
-// const filters = {
-//   All: () => true,
-//   Active: (todo) => !todo.isCompleted,
-//   Completed: (todo) => todo.isCompleted,
-// };
-// //(1b)collect an array of filters 'names' ([All, Active, Completed])
-// const filtersNames = Object.keys(filters);
-
 const SortableItem = SortableElement(({ todo }) => {
   const { toggleComplete, handleDelete, mood } = useGlobalContext();
   // console.log(`todo: `, todo);
   // console.log(`TodoList3 todo: ${todo.todo}, ${todo.isCompleted}, ${todo._id}`);
+
   return (
     <li className={`input-${mood}`} key={`item-${todo.todo}`}>
       <label className="task" data-title="Todo completed?">
