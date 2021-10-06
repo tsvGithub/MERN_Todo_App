@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-//sortable + array move:
-// import { SortableContainer, SortableElement } from "react-sortable-hoc";
-// import arrayMove from "array-move";
 
 import Form from "./Form";
 import Todo from "./Todo";
@@ -168,10 +165,6 @@ const TodoList = () => {
             </button>
           </li>
         </ul>
-
-        {/* {allTodos} */}
-        {/* <ul className="list">{allTodos}</ul> */}
-
         <section className="list">{allTodos}</section>
       </div>
     </main>
