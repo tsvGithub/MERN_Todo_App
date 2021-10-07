@@ -87,6 +87,7 @@ const SortableComponent = () => {
   //     { title: "item 5", description: "task five" },
   //   ]);
   //or this State for todo DB:
+  // eslint-disable-next-line
   const [todo, setTodo] = useState({
     todo: "",
     isCompleted: false,
@@ -124,6 +125,7 @@ const SortableComponent = () => {
     getData();
   };
 
+  // eslint-disable-next-line
   const allTasks = todos.map((todo, id) => {
     // todosReversed.map((todo, id) => {
     // console.log(todo); //    ok;
