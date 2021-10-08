@@ -10,6 +10,10 @@
     "server": "nodemon server --ignore client/",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   },
+  "engines": {
+    "node": "14.x",
+    "npm": "7.x"
+  },
   "author": "tsv",
   "license": "ISC",
   "dependencies": {
