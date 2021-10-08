@@ -16,7 +16,7 @@
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [
-    "MERN"
+    "MERN TODO Sortable Sounds"
   ],
   "author": "tsv",
   "license": "ISC"
