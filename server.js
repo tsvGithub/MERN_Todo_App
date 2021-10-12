@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 //-------------------------
 require("dotenv").config();
 // console.log(process.env.DB_URI);
@@ -15,7 +16,13 @@ let Todo = require("./todo.model");
 //first for deploying; second for developing
 //You don't need to set this PORT variable up with Heroku yourself - it will do it for you.
 const PORT = process.env.PORT || 4000;
+// console.log(process.env.PORT);
+// console.log(PORT);
 //------------------------------------
+// const production = "https://merntodosortableapp.herokuapp.com/";
+// const development = "http://localhost:3000";
+// const url = process.env.NODE_ENV ? production : development;
+// console.log(url);
 // 1 to test what enviroment that we're at
 //if we're in a prodaction enviroment run this code:
 if (process.env.NODE_ENV === "production") {
@@ -42,13 +49,18 @@ if (process.env.NODE_ENV === "production") {
 //MongoDB
 // 'DB_URI' is env.var for Heroku
 const uri = process.env.DB_URI || "mongodb://localhost:27017/todos";
+// console.log(process.env.DB_URI);
 //calling mongoose to connect to 'todos' DB & config objects
-mongoose.connect(uri, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  uri,
+  // console.log(`uri`, uri),
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 const connection = mongoose.connection;
 connection.once("open", function () {
   console.log("MongoDB connected");
@@ -135,6 +147,6 @@ app.delete("/todos", async (req, res) => {
 
 //-----------------------------------------
 //=========================================
-app.listen(PORT, function () {
+app.listen(PORT, () => {
   console.log(`Server is running on Port: ${PORT}`);
 });

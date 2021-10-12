@@ -56,6 +56,8 @@ const AppProvider = ({ children }) => {
   const [playDelete] = useSound(deleteSound);
 
   //=======================
+  // const url = window.location.origin;
+  // console.log(url);
   //Form:
   const changeForm = (e) => {
     const name = e.target.name;
@@ -122,8 +124,8 @@ const AppProvider = ({ children }) => {
     // tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
     // tasksCopy.reverse(); //lomaetsja
     tasksCopy = arrayMoveImmutable(tasksCopy, oldIndex, newIndex);
-
     setTodos(tasksCopy);
+
     // console.log(`onSortEnd tasksCopy, oldIndex, newIndex:`, tasksCopy, oldIndex, newIndex);
     const tasksIds = tasksCopy.map((t) => t._id);
     // console.log(`onSortEnd tasksIds: `, tasksIds);
