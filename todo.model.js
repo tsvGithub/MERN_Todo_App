@@ -20,4 +20,3 @@ const Todo = new Schema({
 });
 //model name "Todo" from let Todo
 module.exports = mongoose.model("Todo", Todo);
-//will be imported in server.js
