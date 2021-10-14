@@ -386,6 +386,9 @@ button.filter-btn:hover {
   text-align: center;
   font-size: 0.8rem;
 }
+.footer > a {
+  font-size: 0.8rem;
+}
 .footer-dark {
   color: var(--DT-Dark-Grayish-Blue);
 }

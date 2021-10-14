@@ -135,6 +135,13 @@ const TodoList3 = () => {
         </section>
         <footer>
           <p className={`footer footer-${mood}`}>Drag and drop to reorder list</p>
+          <p className={`footer footer-${mood}`}>
+            Challenge by{" "}
+            <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">
+              Frontend Mentor
+            </a>
+            . Coded by <a href="https://www.github.com/tsvGithub">TSV</a>
+          </p>
         </footer>
       </div>
     </main>

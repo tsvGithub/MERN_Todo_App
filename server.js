@@ -19,11 +19,8 @@ const PORT = process.env.PORT || 4000;
 // console.log(process.env.PORT);
 // console.log(PORT);
 //------------------------------------
-// const production = "https://merntodosortableapp.herokuapp.com/";
-// const development = "http://localhost:3000";
-// const url = process.env.NODE_ENV ? production : development;
-// console.log(url);
-// 1 to test what enviroment that we're at
+//(Deploying Step 1)
+// to test what enviroment that we're at
 //if we're in a prodaction enviroment run this code:
 if (process.env.NODE_ENV === "production") {
   //that means we're hosted on Heroku/other hosting
@@ -47,6 +44,7 @@ if (process.env.NODE_ENV === "production") {
 
 //-------------------------
 //MongoDB
+//(Deploy Step 2) => Step 3 is in the 'package.json' script 'heroku-postbuild' => Step 4 ===delete .git folder from 'client' directory
 // 'DB_URI' is env.var for Heroku
 const uri = process.env.DB_URI || "mongodb://localhost:27017/todos";
 // console.log(process.env.DB_URI);
