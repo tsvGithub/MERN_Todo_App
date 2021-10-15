@@ -292,6 +292,8 @@ input[type="checkbox"] {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
 }
 
 button.cross {
@@ -315,9 +317,11 @@ button.cross:hover {
 [data-title]:hover::before {
   content: attr(data-title);
   position: absolute;
-  bottom: -10px;
+  /* bottom: -10px;
   bottom: 45px;
-  left: 25px;
+  left: 25px; */
+  top: 0px;
+  left: 0px;
   color: var(--DT-Light-Grayish-Blue);
   background: linear-gradient(to bottom right, #473abd, #813baa);
   -moz-background-clip: text;
@@ -330,6 +334,27 @@ button.cross:hover {
   font-family: "Josefin Sans", sans-serif;
   white-space: nowrap;
 }
+[data-title].cross:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  /* bottom: -10px;
+  bottom: 45px;
+  left: 25px; */
+  top: 100%;
+  left: 0px;
+  color: var(--DT-Light-Grayish-Blue);
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  font-size: 0.8rem;
+  font-family: "Josefin Sans", sans-serif;
+  white-space: nowrap;
+}
+
 /*------------Filters------------------ */
 ul.filter {
   display: flex;
@@ -385,15 +410,16 @@ button.filter-btn {
 }
 /*gradient text*/
 button.current {
-  color: #6157b8;
-  background-image: linear-gradient(to bottom right, #6157b8, #875ca0);
+  /* color: #6157b8;
+  background-image: linear-gradient(to bottom right, #6157b8, #875ca0); */
+  background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
