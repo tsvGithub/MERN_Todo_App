@@ -322,12 +322,11 @@ button.cross:hover {
   left: 25px; */
   top: 0px;
   left: 0px;
-  color: var(--DT-Light-Grayish-Blue);
+  /* color: var(--DT-Light-Grayish-Blue); */
   background: linear-gradient(to bottom right, #473abd, #813baa);
   -moz-background-clip: text;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   font-size: 0.8rem;
@@ -347,7 +346,6 @@ button.cross:hover {
   -moz-background-clip: text;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   font-size: 0.8rem;
@@ -412,17 +410,27 @@ button.filter-btn {
 button.current {
   /* color: #6157b8;
   background-image: linear-gradient(to bottom right, #6157b8, #875ca0); */
-  background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+  /* background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;
   -webkit-background-clip: text;
-  background-clip: text;
+  background-clip: text; */
   /* -webkit-text-fill-color: transparent; */
+  /* -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent; */
+  border: 1px solid transparent;
+  /*-------------------*/
+  background: linear-gradient(to bottom right, #473abd, #813baa);
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-  border: 1px solid transparent;
+  font-size: 0.8rem;
+  font-family: "Josefin Sans", sans-serif;
+  white-space: nowrap;
 }
 
 button.filter-btn:hover {
