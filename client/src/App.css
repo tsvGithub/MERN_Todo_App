@@ -49,6 +49,7 @@ Global Styles
   /* font-size: calc(1.125rem + (36 - 20) * ((100vw - 300px) / (1600 - 300))); */
 }
 *,
+img, button
 *:focus,
 /* *:active, */
 /* *:hover, */
@@ -78,6 +79,7 @@ body {
 ul,
 li {
   list-style-type: none;
+  -webkit-appearance: none;
 }
 a {
   text-decoration: none;
@@ -137,6 +139,7 @@ h1 {
 }
 .switcher img {
   color: var(--DT-Light-Grayish-Blue);
+  -webkit-appearance: none;
 }
 input,
 li {
@@ -289,6 +292,7 @@ button.cross {
   margin-left: auto;
   background: inherit;
   opacity: 0.3;
+  -webkit-appearance: none;
 }
 
 button.cross:hover {
@@ -366,6 +370,7 @@ button.filter-btn {
   color: var(--DT-Dark-Grayish-Blue);
   font-size: clamp(0.6rem, 0.8rem, 1rem);
   cursor: pointer;
+  -webkit-appearance: none;
 }
 /*gradient text*/
 button.current {
