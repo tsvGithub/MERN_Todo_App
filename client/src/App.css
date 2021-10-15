@@ -60,7 +60,7 @@ Global Styles
 *::after {
   outline: 0;
   border: 0;
-  border: none;
+  /* border: none; */
   box-shadow: none;
   outline: 0 solid transparent;
   -webkit-appearance: none;
