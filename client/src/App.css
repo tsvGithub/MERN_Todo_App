@@ -398,7 +398,8 @@ ul.filter > li:first-of-type:hover {
 ul.filter > li.filter-list {
   flex: 3;
 }
-button.filter-btn {
+.filter-btn {
+  /* button.filter-btn { */
   background: transparent;
   border: 1px solid transparent;
   color: var(--DT-Dark-Grayish-Blue);
@@ -407,7 +408,8 @@ button.filter-btn {
   -webkit-appearance: none;
 }
 /*gradient text*/
-button.current {
+/* button.current { */
+.current {
   /* color: #6157b8;
   background-image: linear-gradient(to bottom right, #6157b8, #875ca0); */
   /* background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
