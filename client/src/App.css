@@ -409,8 +409,8 @@ button.filter-btn {
 /*gradient text*/
 ul.filter > .filter-list > .current {
   /* button.current { */
-  color: red;
-  /* background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+  color: #813baa;
+  background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
@@ -418,9 +418,9 @@ ul.filter > .filter-list > .current {
   -webkit-background-clip: text;
   background-clip: text;
   /* -webkit-text-fill-color: transparent; */
-  /*-webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-  border: 1px solid transparent; */
+  border: 1px solid transparent;
 }
 
 button.filter-btn:hover {
