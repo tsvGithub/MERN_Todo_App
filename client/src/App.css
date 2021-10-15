@@ -143,6 +143,11 @@ h1 {
   -webkit-appearance: none;
   border: 1px solid transparent;
 }
+button.switcher,
+img.sw {
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+}
 input,
 li {
   display: flex;
@@ -378,8 +383,9 @@ button.filter-btn {
 }
 /*gradient text*/
 button.current {
+  background-color: #6157b8;
   background-image: linear-gradient(to bottom right, #6157b8, #875ca0);
-  /* background-image: linear-gradient(to bottom right, #473abd, #813baa); */
+  background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;

@@ -114,7 +114,7 @@ const TodoList3 = () => {
           <h1>TODO</h1>
           {/*========================THEME=========================== */}
           <button className="switcher" onClick={switchMood}>
-            <img src={mood === "dark" ? sun : moon} alt="mood" />
+            <img className="sw" src={mood === "dark" ? sun : moon} alt="mood" />
           </button>
         </nav>
         {/*========================FORM=============================== */}
