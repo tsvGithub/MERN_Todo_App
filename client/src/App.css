@@ -398,8 +398,7 @@ ul.filter > li:first-of-type:hover {
 ul.filter > li.filter-list {
   flex: 3;
 }
-.filter-btn {
-  /* button.filter-btn { */
+button.filter-btn {
   background: transparent;
   border: 1px solid transparent;
   color: var(--DT-Dark-Grayish-Blue);
@@ -408,31 +407,20 @@ ul.filter > li.filter-list {
   -webkit-appearance: none;
 }
 /*gradient text*/
-/* button.current { */
-.current {
-  /* color: #6157b8;
-  background-image: linear-gradient(to bottom right, #6157b8, #875ca0); */
-  /* background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+ul.filter > .filter-list > .current {
+  /* button.current { */
+  /* color: red; */
+  background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;
   -webkit-background-clip: text;
-  background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
-  /* -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent; */
-  border: 1px solid transparent;
-  /*-------------------*/
-  background: linear-gradient(to bottom right, #473abd, #813baa);
-  -moz-background-clip: text;
-  -webkit-background-clip: text;
   background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-  font-size: 0.8rem;
-  font-family: "Josefin Sans", sans-serif;
-  white-space: nowrap;
+  border: 1px solid transparent;
 }
 
 button.filter-btn:hover {
