@@ -65,6 +65,7 @@ img, button
   box-shadow: none;
   outline: 0 solid transparent;
   -webkit-appearance: none;
+  border: 1px solid transparent;
 }
 input:focus,
 textarea:focus,
@@ -140,6 +141,7 @@ h1 {
 .switcher img {
   color: var(--DT-Light-Grayish-Blue);
   -webkit-appearance: none;
+  border: 1px solid transparent;
 }
 input,
 li {
@@ -292,6 +294,7 @@ button.cross {
   margin-left: auto;
   background: inherit;
   opacity: 0.3;
+  border: 1px solid transparent;
   -webkit-appearance: none;
 }
 
@@ -367,6 +370,7 @@ ul.filter > li.filter-list {
 }
 button.filter-btn {
   background: transparent;
+  border: 1px solid transparent;
   color: var(--DT-Dark-Grayish-Blue);
   font-size: clamp(0.6rem, 0.8rem, 1rem);
   cursor: pointer;
@@ -383,6 +387,7 @@ button.current {
   -webkit-text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
+  border: 1px solid transparent;
 }
 
 button.filter-btn:hover {
