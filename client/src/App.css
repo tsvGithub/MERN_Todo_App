@@ -298,7 +298,7 @@ button.cross {
   margin-right: 2rem;
   margin-left: auto;
   background: inherit;
-  opacity: 0.3;
+  /* opacity: 0.3; */
   border: 1px solid transparent;
   -webkit-appearance: none;
 }
@@ -316,6 +316,8 @@ button.cross:hover {
   content: attr(data-title);
   position: absolute;
   bottom: -10px;
+  bottom: 45px;
+  left: 25px;
   color: var(--DT-Light-Grayish-Blue);
   background: linear-gradient(to bottom right, #473abd, #813baa);
   -moz-background-clip: text;
@@ -383,7 +385,7 @@ button.filter-btn {
 }
 /*gradient text*/
 button.current {
-  background-color: #6157b8;
+  color: #6157b8;
   background-image: linear-gradient(to bottom right, #6157b8, #875ca0);
   background-image: linear-gradient(to bottom right, #473abd, #813baa);
   background-size: 100%;
