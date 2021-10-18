@@ -407,6 +407,14 @@ button.filter-btn {
   -webkit-appearance: none;
 }
 /*gradient text*/
+@supports (color: red) {
+  /* @supports (color: #813baa) { */
+  ul.filter > .filter-list > .current {
+    color: red;
+    /* color: #813baa; */
+  }
+}
+
 ul.filter > .filter-list > .current {
   /* button.current { */
   /* color: #813baa; */
@@ -426,7 +434,7 @@ ul.filter > .filter-list > .current {
   /* color: #813baa; */
 }
 /*---!!!*/
-@supports (-webkit-background-clip: text) or (background-clip: text) {
+/* @supports (-webkit-background-clip: text) or (background-clip: text) {
   ul.filter > .filter-list > .current {
     background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
     -webkit-background-clip: text;
@@ -442,6 +450,11 @@ ul.filter > .filter-list > .current {
     color: transparent;
   }
 }
+@supports (-webkit-text-fill-color: #813baa) {
+  ul.filter > .filter-list > .current {
+    color: #813baa;
+  }
+} */
 
 button.filter-btn:hover {
   color: var(--DT-Light-Grayish-Blue-hover);
