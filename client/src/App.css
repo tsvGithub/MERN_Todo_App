@@ -429,14 +429,18 @@ ul.filter > .filter-list > .current {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
+
+  -webkit-text-fill-color: rgba(0, 0, 0, 1);
+  -webkit-opacity: 1;
+  opacity: 1;
+  color: rgba(0, 0, 0, 1);
+  /* background: white; */
   /**/
   /* color: #813baa; */
 }
 
 /* } */
-ul.filter > .filter-list > .current {
-  -webkit-text-fill-color: #c54444;
-}
+
 /*---!!!*/
 /* @supports (-webkit-background-clip: text) or (background-clip: text) {
   ul.filter > .filter-list > .current {
