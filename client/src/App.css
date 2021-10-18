@@ -407,12 +407,10 @@ button.filter-btn {
   -webkit-appearance: none;
 }
 /*gradient text*/
-@supports (color: red) {
-  /* @supports (color: #813baa) { */
-  ul.filter > .filter-list > .current {
-    color: red;
-    /* color: #813baa; */
-  }
+/* @supports (color: #813baa) { */
+ul.filter > .filter-list > .current {
+  color: red;
+  /* color: #813baa; */
 }
 
 ul.filter > .filter-list > .current {
