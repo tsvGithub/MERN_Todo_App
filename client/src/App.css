@@ -412,7 +412,8 @@ ul.filter > .filter-list > .current {
   color: red;
   /* color: #813baa; */
 }
-@supports (-webkit-background-clip: text) or (background-clip: text) {
+@supports (background-clip: text) {
+  /* @supports (-webkit-background-clip: text) or (background-clip: text) { */
   ul.filter > .filter-list > .current {
     /* button.current { */
     /* color: #813baa; */
