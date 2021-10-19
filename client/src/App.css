@@ -454,6 +454,10 @@ ul.filter > .filter-list > .current {
 
 @supports not (-webkit-touch-callout: none) {
   /* CSS for other than iOS devices */
+  ul.filter > .filter-list > .current {
+    color: #813baa;
+    font-weight: 600;
+  }
 }
 /*---!!!*/
 /* @supports (-webkit-background-clip: text) or (background-clip: text) {
