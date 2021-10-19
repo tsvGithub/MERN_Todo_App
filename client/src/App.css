@@ -417,8 +417,9 @@ button.filter-btn {
 /* @supports (background-clip: text) { */
 /* @supports (-webkit-background-clip: text) or (background-clip: text) { */
 ul.filter > .filter-list > .current {
-  /* button.current { */
-  /* color: #813baa; */
+  /* button.current {
+  */ /*color: #813baa;
+  */
   background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
   background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
   background-size: 100%;
@@ -430,19 +431,18 @@ ul.filter > .filter-list > .current {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
-
-  /* -webkit-text-fill-color: rgb(0 0 0 / 10%);
+  /*-webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
-  opacity: 1; */
-
-  /* color: rgb(71, 58, 189);
+  opacity: 1;
+  */ /*color: rgb(71, 58, 189);
   text-shadow: 1px 1px 20px rgb(129, 59, 170);
-
   color: rgb(129, 59, 170);
   text-shadow: 1px 1px 20px rgb(71, 58, 189);
- */
+  */
   font-weight: 600;
   color: rgb(129, 59, 170);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* } */
