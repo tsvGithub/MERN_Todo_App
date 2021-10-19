@@ -397,6 +397,11 @@ ul.filter > li:first-of-type:hover {
 }
 ul.filter > li.filter-list {
   flex: 3;
+
+  display: inline-block;
+  padding: 3px;
+  text-align: center;
+  margin-top: 6%;
 }
 button.filter-btn {
   background: transparent;
@@ -438,22 +443,6 @@ ul.filter > .filter-list > .current {
 }
 
 /* } */
-@supports (-webkit-touch-callout: none) {
-  /* CSS specific to iOS devices */
-  ul.filter > .filter-list > .current {
-    color: red;
-    /* color: #813baa; */
-    -webkit-text-stroke-color: yellow;
-  }
-}
-@supports (-webkit-tap-highlight-color: #813baa) {
-  /* CSS specific to iOS devices */
-  ul.filter > .filter-list > .current {
-    color: orange;
-    /* color: #813baa; */
-    -webkit-text-stroke-color: green;
-  }
-}
 
 @supports not (-webkit-touch-callout: none) {
   /* CSS for other than iOS devices */
