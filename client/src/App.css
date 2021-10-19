@@ -447,7 +447,15 @@ ul.filter > .filter-list > .current {
   ul.filter > .filter-list > .current {
     color: red;
     /* color: #813baa; */
-    -webkit-text-stroke-color: #ff0000;
+    -webkit-text-stroke-color: yellow;
+  }
+}
+@supports (-webkit-overflow-scrolling: auto) {
+  /* CSS specific to iOS devices */
+  ul.filter > .filter-list > .current {
+    color: orange;
+    /* color: #813baa; */
+    -webkit-text-stroke-color: green;
   }
 }
 
