@@ -397,11 +397,6 @@ ul.filter > li:first-of-type:hover {
 }
 ul.filter > li.filter-list {
   flex: 3;
-
-  display: inline-block;
-  padding: 3px;
-  text-align: center;
-  margin-top: 6%;
 }
 button.filter-btn {
   background: transparent;
@@ -424,8 +419,8 @@ button.filter-btn {
 ul.filter > .filter-list > .current {
   /* button.current { */
   /* color: #813baa; */
-  /* background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa); */
-  background-image: linear-gradient(to bottom right, #473abd, #813baa);
+  background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+  background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
   background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;
@@ -436,10 +431,18 @@ ul.filter > .filter-list > .current {
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
 
-  -webkit-text-fill-color: rgb(0 0 0 / 10%);
+  /* -webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
-  opacity: 1;
-  /* color: #813baa; */
+  opacity: 1; */
+
+  /* color: rgb(71, 58, 189);
+  text-shadow: 1px 1px 20px rgb(129, 59, 170);
+
+  color: rgb(129, 59, 170);
+  text-shadow: 1px 1px 20px rgb(71, 58, 189);
+ */
+  font-weight: 600;
+  color: rgb(129, 59, 170);
 }
 
 /* } */
