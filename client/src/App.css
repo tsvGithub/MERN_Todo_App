@@ -427,7 +427,6 @@ ul.filter > .filter-list > .current {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  /* -webkit-text-fill-color: transparent; */
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
@@ -435,9 +434,6 @@ ul.filter > .filter-list > .current {
   -webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
   opacity: 1;
-  color: rgb(0 0 0 / 10%);
-  /* background: white; */
-  /**/
   /* color: #813baa; */
 }
 
@@ -450,7 +446,7 @@ ul.filter > .filter-list > .current {
     -webkit-text-stroke-color: yellow;
   }
 }
-@supports (-webkit-overflow-scrolling: auto) {
+@supports (-webkit-tap-highlight-color: #813baa) {
   /* CSS specific to iOS devices */
   ul.filter > .filter-list > .current {
     color: orange;
