@@ -408,10 +408,12 @@ button.filter-btn {
 }
 /*gradient text*/
 /* @supports (color: #813baa) { */
-ul.filter > .filter-list > .current {
+/* ul.filter > .filter-list > .current {
   color: red;
   /* color: #813baa; */
-}
+/* -webkit-text-stroke-color: #ff0000;
+} */
+
 /* @supports (background-clip: text) { */
 /* @supports (-webkit-background-clip: text) or (background-clip: text) { */
 ul.filter > .filter-list > .current {
@@ -430,17 +432,28 @@ ul.filter > .filter-list > .current {
   -moz-text-fill-color: transparent;
   border: 1px solid transparent;
 
-  -webkit-text-fill-color: rgba(0, 0, 0, 1);
+  -webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
   opacity: 1;
-  color: rgba(0, 0, 0, 1);
+  color: rgb(0 0 0 / 10%);
   /* background: white; */
   /**/
   /* color: #813baa; */
 }
 
 /* } */
+@supports (-webkit-touch-callout: none) {
+  /* CSS specific to iOS devices */
+  ul.filter > .filter-list > .current {
+    color: red;
+    /* color: #813baa; */
+    -webkit-text-stroke-color: #ff0000;
+  }
+}
 
+@supports not (-webkit-touch-callout: none) {
+  /* CSS for other than iOS devices */
+}
 /*---!!!*/
 /* @supports (-webkit-background-clip: text) or (background-clip: text) {
   ul.filter > .filter-list > .current {
