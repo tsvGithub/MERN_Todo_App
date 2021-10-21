@@ -317,13 +317,13 @@ button.cross:hover {
 [data-title]:hover::before {
   content: attr(data-title);
   position: absolute;
-  bottom: -5px;
+  bottom: -8px;
   /*
   bottom: 45px;
   left: 25px; */
 
   /* top: 0px; */
-  left: 0px;
+  left: 7px;
   /* color: var(--DT-Light-Grayish-Blue); */
   background: linear-gradient(to bottom right, #473abd, #813baa);
   -moz-background-clip: text;
@@ -416,34 +416,37 @@ button.filter-btn {
 /* -webkit-text-stroke-color: #ff0000;
 } */
 
-ul.filter > .filter-list > .current {
+/* ul.filter > .filter-list > .current { */
+ul.filter > .filter-list > .current-dark {
   color: #813baa;
-  font-weight: 600;
+}
+ul.filter > .filter-list > .current-light {
+  color: #710df5;
 }
 
 /* @supports (background-clip: text) { */
 /* @supports (-webkit-background-clip: text) or (background-clip: text) { */
-
+/* 
 ul.filter > .filter-list > .current {
   /* button.current {
   */ /*color: #813baa;
   */
-  display: inline-block;
+/* display: inline-block;
   font-size: inherit;
   background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
-  background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
-  /* background-size: 100%;
+  background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170)); */
+/* background-size: 100%;
   background-repeat: repeat;
   -moz-background-clip: text;
   -webkit-background-clip: text; */
-  background-clip: text;
-  color: transparent;
-  /* -webkit-text-fill-color: transparent;
+/* background-clip: text;
+  color: transparent; */
+/* -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent; */
-  border: 1px solid transparent;
-  /* mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
+/* border: 1px solid transparent; */
+/* mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
   -webkit-mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170)); */
-  /*-webkit-text-fill-color: rgb(0 0 0 / 10%);
+/*-webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
   opacity: 1;
   */ /*color: rgb(71, 58, 189);
@@ -451,9 +454,9 @@ ul.filter > .filter-list > .current {
   color: rgb(129, 59, 170);
   text-shadow: 1px 1px 20px rgb(71, 58, 189);
   */
-  /* font-weight: 600; */
-  /* color: rgb(129, 59, 170); */
-}
+/* font-weight: 600; */
+/* color: rgb(129, 59, 170); */
+/* } */
 
 /* @supports not (-webkit-touch-callout: none) {
   /* CSS for other than iOS devices */

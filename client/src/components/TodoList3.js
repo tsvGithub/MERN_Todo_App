@@ -59,7 +59,7 @@ const SortableList = SortableContainer(({ items }) => {
       //filters
       <button
         key={`item-${name}`}
-        className={filter === name ? "current filter-btn" : "filter-btn"}
+        className={filter === name ? `filter-btn current-${mood} ` : "filter-btn"}
         // onClick={() => console.log(name)} //OK
         // onClick={() => setFilter(name)}
         onClick={() => toggleFilter(name)}
