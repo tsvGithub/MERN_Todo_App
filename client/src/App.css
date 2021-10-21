@@ -317,10 +317,12 @@ button.cross:hover {
 [data-title]:hover::before {
   content: attr(data-title);
   position: absolute;
-  /* bottom: -10px;
+  bottom: -5px;
+  /*
   bottom: 45px;
   left: 25px; */
-  top: 0px;
+
+  /* top: 0px; */
   left: 0px;
   /* color: var(--DT-Light-Grayish-Blue); */
   background: linear-gradient(to bottom right, #473abd, #813baa);
@@ -422,27 +424,26 @@ ul.filter > .filter-list > .current {
 /* @supports (background-clip: text) { */
 /* @supports (-webkit-background-clip: text) or (background-clip: text) { */
 
-@supports ((background-clip: text) or (-webkit-background-clip: text)) and
-  ((text-fill-color: transparent) or (-webkit-text-fill-color: transparent)) {
-  ul.filter > .filter-list > .current {
-    /* button.current {
+ul.filter > .filter-list > .current {
+  /* button.current {
   */ /*color: #813baa;
   */
-    font-size: inherit;
-    background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
-    background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
-    background-size: 100%;
-    background-repeat: repeat;
-    -moz-background-clip: text;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    border: 1px solid transparent;
-    mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
-    -webkit-mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
-    /*-webkit-text-fill-color: rgb(0 0 0 / 10%);
+  display: inline-block;
+  font-size: inherit;
+  background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+  background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
+  /* background-size: 100%;
+  background-repeat: repeat;
+  -moz-background-clip: text;
+  -webkit-background-clip: text; */
+  background-clip: text;
+  color: transparent;
+  /* -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent; */
+  border: 1px solid transparent;
+  /* mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
+  -webkit-mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170)); */
+  /*-webkit-text-fill-color: rgb(0 0 0 / 10%);
   -webkit-opacity: 1;
   opacity: 1;
   */ /*color: rgb(71, 58, 189);
@@ -450,9 +451,8 @@ ul.filter > .filter-list > .current {
   color: rgb(129, 59, 170);
   text-shadow: 1px 1px 20px rgb(71, 58, 189);
   */
-    /* font-weight: 600; */
-    /* color: rgb(129, 59, 170); */
-  }
+  /* font-weight: 600; */
+  /* color: rgb(129, 59, 170); */
 }
 
 /* @supports not (-webkit-touch-callout: none) {
