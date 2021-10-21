@@ -428,8 +428,11 @@ ul.filter > .filter-list > .current {
     /* button.current {
   */ /*color: #813baa;
   */
-    background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
-    background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
+    font-size: inherit;
+    background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+    /* background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa); */
+    background: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
+    /* background-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170)); */
     background-size: 100%;
     background-repeat: repeat;
     -moz-background-clip: text;
@@ -452,9 +455,16 @@ ul.filter > .filter-list > .current {
   }
 }
 
-@supports not (-webkit-touch-callout: none) {
+/* @supports not (-webkit-touch-callout: none) {
   /* CSS for other than iOS devices */
+/* ul.filter > .filter-list > .current {
+    color: #813baa;
+    font-weight: 600;
+  }
+} */
+@supports (-webkit-overflow-scrolling: touch) {
   ul.filter > .filter-list > .current {
+    -webkit-text-fill-color: unset;
     color: #813baa;
     font-weight: 600;
   }
