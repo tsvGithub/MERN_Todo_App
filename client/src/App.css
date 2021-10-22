@@ -317,13 +317,8 @@ button.cross:hover {
 [data-title]:hover::before {
   content: attr(data-title);
   position: absolute;
-  bottom: -8px;
-  /*
-  bottom: 45px;
-  left: 25px; */
-
-  /* top: 0px; */
-  left: 7px;
+  bottom: -10%;
+  left: 100%;
   /* color: var(--DT-Light-Grayish-Blue); */
   background: linear-gradient(to bottom right, #473abd, #813baa);
   -moz-background-clip: text;
@@ -338,10 +333,7 @@ button.cross:hover {
 [data-title].cross:hover::before {
   content: attr(data-title);
   position: absolute;
-  /* bottom: -10px;
-  bottom: 45px;
-  left: 25px; */
-  top: 100%;
+  top: -100%;
   left: 0px;
   color: var(--DT-Light-Grayish-Blue);
   background: linear-gradient(to bottom right, #473abd, #813baa);
@@ -408,29 +400,19 @@ button.filter-btn {
   cursor: pointer;
   -webkit-appearance: none;
 }
-/*gradient text*/
-/* @supports (color: #813baa) { */
-/* ul.filter > .filter-list > .current {
-  color: red;
-  /* color: #813baa; */
-/* -webkit-text-stroke-color: #ff0000;
-} */
-
-/* ul.filter > .filter-list > .current { */
 ul.filter > .filter-list > .current-dark {
   color: #813baa;
 }
 ul.filter > .filter-list > .current-light {
   color: #710df5;
 }
-
-/* @supports (background-clip: text) { */
-/* @supports (-webkit-background-clip: text) or (background-clip: text) { */
-/* 
-ul.filter > .filter-list > .current {
-  /* button.current {
+/*gradient text =>------------------------------------------------
+ NB! Safari doesn't support -webkit-background-clip: text; so
+it renders nothing instead of gradient text. All work-around also didn't help. 
+@support Safari supports from 2021.04 :-( Tested on iPhone 8 & iPad*/
+/* ul.filter > .filter-list > .current { */
+/* button.current {
   */ /*color: #813baa;
-  */
 /* display: inline-block;
   font-size: inherit;
   background-image: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
@@ -444,61 +426,30 @@ ul.filter > .filter-list > .current {
 /* -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent; */
 /* border: 1px solid transparent; */
-/* mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170));
-  -webkit-mask-image: linear-gradient(to bottom right, rgb(71, 58, 189), rgb(129, 59, 170)); */
-/*-webkit-text-fill-color: rgb(0 0 0 / 10%);
-  -webkit-opacity: 1;
-  opacity: 1;
-  */ /*color: rgb(71, 58, 189);
-  text-shadow: 1px 1px 20px rgb(129, 59, 170);
-  color: rgb(129, 59, 170);
-  text-shadow: 1px 1px 20px rgb(71, 58, 189);
-  */
-/* font-weight: 600; */
-/* color: rgb(129, 59, 170); */
 /* } */
 
 /* @supports not (-webkit-touch-callout: none) {
   /* CSS for other than iOS devices */
 /* ul.filter > .filter-list > .current {
-    color: #813baa;
-    font-weight: 600;
+    background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 } */
 /* @supports (-webkit-overflow-scrolling: touch) {
+    /* CSS for iOS devices 
   ul.filter > .filter-list > .current {
     -webkit-text-fill-color: unset;
     color: #813baa;
     font-weight: 600;
   }
-} */
-/*---!!!*/
-/* @supports (-webkit-background-clip: text) or (background-clip: text) {
-  ul.filter > .filter-list > .current {
-    background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-    color: transparent;
-  }
 }
-@supports (background: -webkit-linear-gradient) {
-  ul.filter > .filter-list > .current {
-    background: -webkit-linear-gradient(to bottom right, #473abd, #813baa);
-    color: transparent;
-  }
-}
-@supports (-webkit-text-fill-color: #813baa) {
-  ul.filter > .filter-list > .current {
-    color: #813baa;
-  }
-} */
-
+----------------------------------------------------- */
 button.filter-btn:hover {
   color: var(--DT-Light-Grayish-Blue-hover);
 }
-
 .footer {
   text-align: center;
   font-size: 0.8rem;
@@ -512,6 +463,7 @@ button.filter-btn:hover {
 .footer-light {
   color: var(--DT-Very-Dark-Desaturated-);
 }
+/* ========================================== */
 /*---Medium size and less 48em (768px)------ */
 @media screen and (max-width: 48em) {
   ul.filter {

@@ -5,8 +5,6 @@ import { arrayMoveImmutable } from "array-move";
 // import { arrayMove } from "react-sortable-hoc";
 //----------------------
 import useSound from "use-sound";
-// import completeSound from "../assets/audio/Good-idea-bell.mp3";
-// import deleteSound from "../assets/audio/Low-battery-notify.mp3";
 import completeSound from "./assets/audio/Good-idea-bell.mp3";
 import deleteSound from "./assets/audio/Low-battery-notify.mp3";
 
@@ -56,8 +54,6 @@ const AppProvider = ({ children }) => {
   const [playDelete] = useSound(deleteSound);
 
   //=======================
-  // const url = window.location.origin;
-  // console.log(url);
   //Form:
   const changeForm = (e) => {
     const name = e.target.name;
