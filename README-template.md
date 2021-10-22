@@ -1,6 +1,6 @@
-# Frontend Mentor - Todo app solution
+# Frontend Mentor - MERN Todo app solution
 
-This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is my MERN solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -24,95 +24,67 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 Users should be able to:
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Add new todos to the list
-- Mark todos as complete
-- Delete todos from the list
+- Add new todos to the list and save it in the database.
+- Mark todos as complete and save it in the database.
+- Play sound checking complete todos
+- Delete todos from the list and the database.
+- Play sound deleting todos
 - Filter by all/active/complete todos
 - Clear all completed todos
 - Toggle light and dark mode
-- **Bonus**: Drag and drop to reorder items on the list
+- Drag and drop to reorder items on the list
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Toggle light and dark mode
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+[./resources/todo-preview.png]
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://mern-todosortable.herokuapp.com/]
 
 ## My process
 
 ### Built with
 
+- MERN (MongoDB, Express, React and Node) CRUD
+- [React](https://reactjs.org/) - JS library
+- ReactJS Hooks, Context, Sounds, Sortable...
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
 - CSS Grid
+- CSS variables
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I have learned how to:
 
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+- use ReactJS with Node.js & MongoDB
+- connect ReactJS Sortable with Node.js & MongoDB
+- use CSS variables
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+I plan to continue to:
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+- add user Auths
+- add Edit option for todo
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [https://youtu.be/Pfg-cGGzEqs] - This helped me a lot with Sortable.
+- [https://youtu.be/35BSnmTbjlE?t=5128] - This helped me magnifically with deployment on Heroku.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- GitHub - [https://github.com/tsvGithub]
+- Frontend Mentor - [@tsvGithub https://www.frontendmentor.io/profile/tsvGithub]
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+I have to thanks Frontend Mentor for inspiration, best challenges and chance to practice and learning new knowledge 🌹
