@@ -16,8 +16,6 @@ This is my MERN solution to the [Todo app challenge on Frontend Mentor](https://
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -43,14 +41,15 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+<!-- - Solution URL: [Add solution URL here](https://your-solution-url.com) -->
+
 - Live Site URL: [https://mern-todosortable.herokuapp.com/]
 
 ## My process
 
 ### Built with
 
-- MERN (MongoDB, Express, React and Node) CRUD
+- MERN CRUD
 - [React](https://reactjs.org/) - JS library
 - ReactJS Hooks, Context, Sounds, Sortable...
 - Semantic HTML5 markup
@@ -62,7 +61,7 @@ Users should be able to:
 
 ### What I learned
 
-I have learned how to:
+How to:
 
 - use ReactJS with Node.js & MongoDB
 - connect ReactJS Sortable with Node.js & MongoDB
@@ -70,14 +69,12 @@ I have learned how to:
 
 ### Continued development
 
-I plan to continue to:
-
-- add user Auths
-- add Edit option for todo
+- user Auths
+- Edit option for todo
 
 ### Useful resources
 
-- [https://youtu.be/Pfg-cGGzEqs] - This helped me a lot with Sortable.
+- [https://youtu.be/Pfg-cGGzEqs] - This helped me a lot doing Sortable with MERN.
 - [https://youtu.be/35BSnmTbjlE?t=5128] - This helped me magnifically with deployment on Heroku.
 
 ## Author
