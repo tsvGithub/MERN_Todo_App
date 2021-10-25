@@ -39,7 +39,7 @@ Users should be able to:
 
 ### Screenshot
 
-![../resources/todo-preview.png]
+![./resources/todo-preview.jpg]
 
 ### Links
 
