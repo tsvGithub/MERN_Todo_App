@@ -65,17 +65,20 @@ img, button
   box-shadow: none;
   outline: 0 solid transparent;
   -webkit-appearance: none;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
 }
 input:focus,
 textarea:focus,
 select:focus {
   outline: none;
 }
-
 body {
   line-height: 1.5;
+  height: 100vh;
   /* color: var(--DT-Light-Grayish-Blue); */
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 ul,
 li {
